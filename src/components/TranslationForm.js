@@ -1,17 +1,23 @@
 import React from "react";
 import { key } from "../constant";
-import { TextArea } from "../styled";
+import {
+  TextArea,
+  SelectDiv,
+  Select,
+  TranslateButton,
+  SaveButton,
+} from "../styled";
 
 class TranslationForm extends React.Component {
   state = {
     input: "",
     output: "",
+    chosenLanguage: "",
     languageId: "",
   };
 
   fetchApi = (event) => {
     event.preventDefault();
-
     fetch(
       `https://translation.googleapis.com/language/translate/v2?key=${key}`,
       {
@@ -42,21 +48,35 @@ class TranslationForm extends React.Component {
 
   render() {
     console.log(this.state);
+    console.log(this.props.state);
+    console.log(this.props.state.languages);
     return (
       <div>
         <h2> Translate Here:</h2>
         <div>
           <form onChange={this.handleChange} onSubmit={this.fetchApi}>
+            <SelectDiv>
+              <Select name="chosenLanguage">
+                <option value="">Select Language:</option>
+                {this.props.state.languages.map((language) => {
+                  return (
+                    <option key={language.id} value={language.language_code}>
+                      {language.language}
+                    </option>
+                  );
+                })}
+              </Select>
+            </SelectDiv>
             <TextArea
               name="input"
               maxLength="75"
               placeholder="Translate Text Here"
             />
             <TextArea name="output" disabled={true} />
-            <button type="submit">Translate</button>
+            <TranslateButton type="submit">Translate</TranslateButton>
           </form>
         </div>
-        <button onClick={this.saveTranslation}>Save Translation</button>
+        <SaveButton onClick={this.saveTranslation}>Save Translation</SaveButton>
       </div>
     );
   }

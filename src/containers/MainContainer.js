@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import ProfileContainer from "./ProfileContainer";
@@ -6,18 +7,47 @@ import TranslationForm from "../components/TranslationForm";
 import QuizContainer from "./QuizContainer";
 import WrongLink from "../components/WrongLink";
 
-const MainContainer = (props) => {
-  return (
-    <div>
-      <div> MainContainer </div>
-      <Login />
-      <Signup />
-      <ProfileContainer />
-      <TranslationForm />
-      <QuizContainer />
-      <WrongLink />
-    </div>
-  );
-};
+class MainContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      languages: [],
+      translations: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/api/v1/translations")
+      .then((resp) => resp.json())
+      .then((translations) => {
+        fetch("http://localhost:3000/api/v1/languages")
+          .then((resp) => resp.json())
+          .then((languages) => {
+            this.setState({ languages: languages, translations: translations });
+          });
+      });
+  }
+
+  render() {
+    console.log(this.state);
+    return (
+      <div>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/profile" component={ProfileContainer} />
+          <Route
+            path="/translate"
+            render={(props) => (
+              <TranslationForm {...props} state={this.state} />
+            )}
+          />
+          <Route path="/quiz" component={QuizContainer} />
+          <Route component={WrongLink} />
+        </Switch>
+      </div>
+    );
+  }
+}
 
 export default MainContainer;
