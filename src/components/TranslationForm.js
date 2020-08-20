@@ -6,6 +6,7 @@ import {
   Select,
   TranslateButton,
   SaveButton,
+  Translateh2,
 } from "../styled";
 
 class TranslationForm extends React.Component {
@@ -52,7 +53,7 @@ class TranslationForm extends React.Component {
     console.log(this.props.state.languages);
     return (
       <div>
-        <h2> Translate Here:</h2>
+        <Translateh2>Translate and Save Your Translations Here 😊</Translateh2>
         <div>
           <form onChange={this.handleChange} onSubmit={this.fetchApi}>
             <SelectDiv>
