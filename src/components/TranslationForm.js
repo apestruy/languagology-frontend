@@ -28,18 +28,36 @@ class TranslationForm extends React.Component {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          q: ["Hello world", "My name is Jeff"],
-          target: "de",
+          q: `${this.state.input}`,
+          source: "en",
+          target: `${this.state.chosenLanguage}`,
+          format: "text",
         }),
       }
     )
       .then((resp) => resp.json())
-      .then((translation) => console.log(translation));
+      .then((translation) => {
+        let targetLanguage = this.props.languages.find(
+          (language) => language.language_code === this.state.chosenLanguage
+        );
+        this.setState({
+          output: translation.data.translations[0].translatedText,
+          languageId: targetLanguage.id,
+        });
+      });
   };
 
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
+    });
+  };
+
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.name]:
+        event.target.value.charAt(0).toUpperCase() +
+        event.target.value.slice(1),
     });
   };
 
@@ -49,17 +67,20 @@ class TranslationForm extends React.Component {
 
   render() {
     console.log(this.state);
-    console.log(this.props.state);
-    console.log(this.props.state.languages);
+    console.log(this.props.languages);
     return (
       <div>
         <Translateh2>Translate and Save Your Translations Here 😊</Translateh2>
         <div>
-          <form onChange={this.handleChange} onSubmit={this.fetchApi}>
+          <form onSubmit={this.fetchApi}>
             <SelectDiv>
-              <Select name="chosenLanguage">
+              <Select
+                name="chosenLanguage"
+                value={this.state.chosenLanguage}
+                onChange={this.handleChange}
+              >
                 <option value="">Select Language:</option>
-                {this.props.state.languages.map((language) => {
+                {this.props.languages.map((language) => {
                   return (
                     <option key={language.id} value={language.language_code}>
                       {language.language}
@@ -70,10 +91,17 @@ class TranslationForm extends React.Component {
             </SelectDiv>
             <TextArea
               name="input"
+              value={this.state.input}
+              onChange={this.handleInputChange}
               maxLength="75"
               placeholder="Translate Text Here"
             />
-            <TextArea name="output" disabled={true} />
+            <TextArea
+              name="output"
+              value={this.state.output}
+              onChange={this.handleChange}
+              disabled={true}
+            />
             <TranslateButton type="submit">Translate</TranslateButton>
           </form>
         </div>

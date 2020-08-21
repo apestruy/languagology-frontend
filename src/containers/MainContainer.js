@@ -39,7 +39,7 @@ class MainContainer extends React.Component {
           <Route
             path="/translate"
             render={(props) => (
-              <TranslationForm {...props} state={this.state} />
+              <TranslationForm {...props} languages={this.state.languages} />
             )}
           />
           <Route path="/quiz" component={QuizContainer} />

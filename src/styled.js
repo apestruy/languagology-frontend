@@ -3,10 +3,12 @@ import styled from "styled-components";
 export const TextArea = styled.textarea`
   border-radius: 5px;
   margin: 1rem;
-  font-size: 1.4em;
+  font-size: 1.5em;
   width: 25em;
   height: 7em;
   border: 1px solid black;
+  color: black;
+  background: #fff5ec;
 `;
 
 export const WrongLinkImg = styled.img`
@@ -26,8 +28,9 @@ export const SelectDiv = styled.div`
 
 export const Select = styled.select`
   border-radius: 5px;
+  margin: 1rem;
   width: 11em;
-  height: 2em;
+  height: 2.5em;
   font-size: 16px;
   font-weight: 550;
   padding-left: 5px;
@@ -39,8 +42,8 @@ export const Select = styled.select`
 export const TranslateButton = styled.button`
   position: fixed;
   border-radius: 25px;
-  top: 289px;
-  right: 200px;
+  top: 332px;
+  right: 170px;
   width: 8em;
   height: 3em;
   font-size: 17px;
@@ -81,8 +84,8 @@ export const NavButton = styled.button`
   height: 2em;
   border: 2px solid #a10303;
   border-radius: 9px;
-  background-color: #68c4cf;
+  background-color: #8fd3db;
   position: relative;
-  top: 30px;
+  top: 26px;
   font-family: "sans-serif";
 `;
