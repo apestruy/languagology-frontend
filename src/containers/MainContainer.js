@@ -28,6 +28,12 @@ class MainContainer extends React.Component {
       });
   }
 
+  handleSavedTranslation = (newTranslation) => {
+    this.setState({
+      translations: [...this.state.translations, newTranslation],
+    });
+  };
+
   render() {
     console.log(this.state);
     return (
@@ -35,11 +41,24 @@ class MainContainer extends React.Component {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/profile" component={ProfileContainer} />
+          <Route
+            path="/profile"
+            render={(props) => (
+              <ProfileContainer
+                {...props}
+                translations={this.state.translations}
+                languages={this.state.languages}
+              />
+            )}
+          />
           <Route
             path="/translate"
             render={(props) => (
-              <TranslationForm {...props} languages={this.state.languages} />
+              <TranslationForm
+                {...props}
+                languages={this.state.languages}
+                handleSavedTranslation={this.handleSavedTranslation}
+              />
             )}
           />
           <Route path="/quiz" component={QuizContainer} />

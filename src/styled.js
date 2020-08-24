@@ -65,6 +65,18 @@ export const SaveButton = styled.button`
   border: 2px solid black;
 `;
 
+export const ClearButton = styled.button`
+  border-radius: 5px;
+  margin: 1rem;
+  width: 10em;
+  height: 2em;
+  font-size: 14px;
+  font-weight: 550;
+  padding-left: 5px;
+  background: #97caef;
+  border: 1px solid black;
+`;
+
 export const Translateh2 = styled.h2`
   font-family: "Helvetica";
   font-size: 21px;
@@ -88,4 +100,80 @@ export const NavButton = styled.button`
   position: relative;
   top: 26px;
   font-family: "sans-serif";
+`;
+
+export const ProfTranslationsDiv = styled.div`
+  position: fixed;
+  border: 1px solid black;
+  left: 100px;
+  width: 44em;
+  height: 48em;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+`;
+
+export const ProfQuizDiv = styled.div`
+  position: fixed;
+  border: 1px solid black;
+  left: 874px;
+  width: 44em;
+  height: 48em;
+`;
+
+export const TranslationText = styled.p`
+  font-size: 16px;
+  font-weight: 550;
+  text-align: left;
+  position: relative;
+  left: 3px;
+`;
+
+export const InputDiv = styled.div`
+  position: absolute;
+  left: 20px;
+  border: 2px solid black;
+  width: 15em;
+  border-radius: 5px;
+  background: #cafafe;
+  //   color: #550000;
+  //   color: #173f5f;
+`;
+
+export const OutputDiv = styled.div`
+  position: relative;
+  display: inline-block;
+  left: 250px;
+  border: 2px solid black;
+  width: 15em;
+  border-radius: 5px;
+  background: #cafafe;
+  color: #a10310;
+`;
+
+export const LanguageDiv = styled.div`
+  position: relative;
+  display: inline-block;
+  left: 250px;
+  //   border: 1px solid black;
+  width: 10em;
+  font-size: 16px;
+  font-weight: 650;
+`;
+
+export const Grid = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto;
+`;
+
+export const Row = styled.div`
+  display: flex;
+`;
+
+export const Col = styled.div`
+  justify-content: center;
+  margin: 1rem;
+  padding: 5px;
+  //   flex: 25;
+  //   position: center;
 `;

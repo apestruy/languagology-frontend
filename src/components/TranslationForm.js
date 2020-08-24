@@ -7,6 +7,7 @@ import {
   TranslateButton,
   SaveButton,
   Translateh2,
+  ClearButton,
 } from "../styled";
 
 class TranslationForm extends React.Component {
@@ -15,6 +16,7 @@ class TranslationForm extends React.Component {
     output: "",
     chosenLanguage: "",
     languageId: "",
+    saved: false,
   };
 
   fetchApi = (event) => {
@@ -50,6 +52,7 @@ class TranslationForm extends React.Component {
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
+      saved: false,
     });
   };
 
@@ -58,11 +61,41 @@ class TranslationForm extends React.Component {
       [event.target.name]:
         event.target.value.charAt(0).toUpperCase() +
         event.target.value.slice(1),
+      saved: false,
     });
   };
 
   saveTranslation = () => {
-    console.log("saved!");
+    fetch("http://localhost:3000/api/v1/translations", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        input: this.state.input,
+        output: this.state.output,
+        user_id: 1,
+        language_id: this.state.languageId,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((newTranslation) => {
+        this.props.handleSavedTranslation(newTranslation);
+        this.setState({
+          saved: !this.state.saved,
+        });
+      });
+  };
+
+  clearTextAreas = () => {
+    this.setState({
+      input: "",
+      output: "",
+      chosenLanguage: "",
+      languageId: "",
+      saved: false,
+    });
   };
 
   render() {
@@ -102,10 +135,24 @@ class TranslationForm extends React.Component {
               onChange={this.handleChange}
               disabled={true}
             />
-            <TranslateButton type="submit">Translate</TranslateButton>
+            <div>
+              {this.state.input && this.state.chosenLanguage && (
+                <TranslateButton type="submit">Translate</TranslateButton>
+              )}
+            </div>
           </form>
         </div>
-        <SaveButton onClick={this.saveTranslation}>Save Translation</SaveButton>
+        <div>
+          {this.state.output && !this.state.saved && (
+            <SaveButton onClick={this.saveTranslation}>
+              Save Translation
+            </SaveButton>
+          )}
+        </div>
+        <ClearButton onClick={this.clearTextAreas}>
+          Clear All Inputs
+        </ClearButton>
+        <div>{this.state.saved && <h3>Successfully Saved</h3>}</div>
       </div>
     );
   }
