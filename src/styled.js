@@ -84,9 +84,11 @@ export const Translateh2 = styled.h2`
 `;
 
 export const AppNameH1 = styled.h1`
-  color: #b40304;
+  //   color: #b40304;
+  //   color: #46344e;
+  color: #78244c;
   font-size: 55px;
-  font-family: "sans-serif";
+  //   font-family: "sans-serif";
 `;
 
 export const NavButton = styled.button`
@@ -94,9 +96,12 @@ export const NavButton = styled.button`
   margin: 2em;
   width: 7em;
   height: 2em;
-  border: 2px solid #a10303;
+  //   border: 2px solid #a10303;
   border-radius: 9px;
-  background-color: #8fd3db;
+  //   background-color: #a2dbe1;
+  //   background-color: #f5e6cc;
+  //   background-color: #eae7dc;
+  background-color: #e7e3d4;
   position: relative;
   top: 26px;
   font-family: "sans-serif";
@@ -104,21 +109,26 @@ export const NavButton = styled.button`
 
 export const ProfTranslationsDiv = styled.div`
   position: fixed;
-  border: 1px solid black;
+  //   border: 2px solid #a10310;
+  border-radius: 15px;
   left: 100px;
   width: 44em;
-  height: 48em;
+  height: 46em;
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  //   background: #a2dbe1;
+  background: #84ceeb;
 `;
 
 export const ProfQuizDiv = styled.div`
   position: fixed;
-  border: 1px solid black;
+  //   border: 2px solid #a10310;
+  border-radius: 15px;
   left: 874px;
   width: 44em;
-  height: 48em;
+  height: 46em;
+  background-color: #84ceeb;
 `;
 
 export const TranslationText = styled.p`
@@ -126,29 +136,37 @@ export const TranslationText = styled.p`
   font-weight: 550;
   text-align: left;
   position: relative;
-  left: 3px;
+  padding-left: 12px;
+  padding-right: 2px;
 `;
 
 export const InputDiv = styled.div`
   position: absolute;
   left: 20px;
-  border: 2px solid black;
+  //   border: 2px solid black;
   width: 15em;
   border-radius: 5px;
-  background: #cafafe;
-  //   color: #550000;
-  //   color: #173f5f;
+  //   background: #cafafe;
+  background: #d2fdff;
+  color: #2d283e;
+  //   color: #5d6985;
 `;
 
 export const OutputDiv = styled.div`
   position: relative;
   display: inline-block;
   left: 250px;
-  border: 2px solid black;
+  //   border: 2px solid black;
   width: 15em;
   border-radius: 5px;
-  background: #cafafe;
+  //   background: #cafafe;
+  background: #d2fdff;
+  //   background-color: #84ceeb;
   color: #a10310;
+  //   color: #ac3b61;
+  //   color: #78244c;
+  //   color: #bc4639;
+  //   color: #b23850;
 `;
 
 export const LanguageDiv = styled.div`
@@ -159,6 +177,17 @@ export const LanguageDiv = styled.div`
   width: 10em;
   font-size: 16px;
   font-weight: 650;
+  //   color: #46344e;
+  color: #2d283e;
+`;
+
+export const SavedTranslationsTitle = styled.div`
+  position: relative;
+  top: 21px;
+  font-size: 26px;
+  font-weight: 650;
+  //   color: #46344e;
+  color: #2d283e;
 `;
 
 export const Grid = styled.div`

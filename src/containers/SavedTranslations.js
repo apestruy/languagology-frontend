@@ -1,10 +1,11 @@
 import React from "react";
 import TranslationCard from "../components/TranslationCard";
-import { Grid, Row, Col } from "../styled";
+import FilterBar from "../components/FilterBar";
+import { Grid, Row, Col, SavedTranslationsTitle } from "../styled";
 
 class SavedTranslations extends React.Component {
   state = {
-    filter: "",
+    filter: "all",
   };
 
   renderTranslations = () => {
@@ -24,7 +25,8 @@ class SavedTranslations extends React.Component {
     console.log(this.props.translations);
     return (
       <div>
-        <div> SavedTranslations </div>
+        <SavedTranslationsTitle>Saved Translations</SavedTranslationsTitle>
+        <FilterBar translations={this.props.translations} />
         <Grid>
           <Row>
             <Col>{this.renderTranslations()}</Col>
