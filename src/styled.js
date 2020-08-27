@@ -34,8 +34,32 @@ export const Select = styled.select`
   font-size: 16px;
   font-weight: 550;
   padding-left: 5px;
-  //   color: white;
   background: #97caef;
+  border: 1px solid black;
+`;
+
+export const FilterDiv = styled.div`
+  position: relative;
+  top: 35px;
+`;
+
+export const FilterText = styled.div`
+  position: relative;
+  display: inline-block;
+  right: 8px;
+  font-size: 16px;
+  font-weight: 550;
+`;
+
+export const FilterSelect = styled.select`
+  display: inline-block;
+  border-radius: 5px;
+  width: 8em;
+  height: 2em;
+  font-size: 16px;
+  font-weight: 550;
+  padding-left: 5px;
+  background: #add8e6;
   border: 1px solid black;
 `;
 
@@ -84,9 +108,9 @@ export const Translateh2 = styled.h2`
 `;
 
 export const AppNameH1 = styled.h1`
-  //   color: #b40304;
+  color: #b40304;
   //   color: #46344e;
-  color: #78244c;
+  //   color: #78244c;
   font-size: 55px;
   //   font-family: "sans-serif";
 `;
@@ -113,12 +137,14 @@ export const ProfTranslationsDiv = styled.div`
   border-radius: 15px;
   left: 100px;
   width: 44em;
-  height: 46em;
+  height: 47em;
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  //   background: #3feee6;
   //   background: #a2dbe1;
-  background: #84ceeb;
+  //   background: #9ad7ef;
+  background: #d4e7e3;
 `;
 
 export const ProfQuizDiv = styled.div`
@@ -127,8 +153,12 @@ export const ProfQuizDiv = styled.div`
   border-radius: 15px;
   left: 874px;
   width: 44em;
-  height: 46em;
-  background-color: #84ceeb;
+  height: 47em;
+  background: #d4e7e3;
+  //   background: #55bcc9;
+  //   background-color: #84ceeb;
+  //   background: #9ad7ef;
+  //   background: #b0dff2;
 `;
 
 export const TranslationText = styled.p`
@@ -147,7 +177,8 @@ export const InputDiv = styled.div`
   width: 15em;
   border-radius: 5px;
   //   background: #cafafe;
-  background: #d2fdff;
+  background: #e3fcfe;
+  //   background: #d2fdff;
   color: #2d283e;
   //   color: #5d6985;
 `;
@@ -160,11 +191,12 @@ export const OutputDiv = styled.div`
   width: 15em;
   border-radius: 5px;
   //   background: #cafafe;
-  background: #d2fdff;
-  //   background-color: #84ceeb;
+  //   background: #d2fdff;
+
+  background-color: #e3fcfe;
   color: #a10310;
-  //   color: #ac3b61;
   //   color: #78244c;
+  //   color: #ac3b61;
   //   color: #bc4639;
   //   color: #b23850;
 `;

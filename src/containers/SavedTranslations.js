@@ -8,25 +8,53 @@ class SavedTranslations extends React.Component {
     filter: "all",
   };
 
-  renderTranslations = () => {
-    let translationsToRender = this.props.translations;
-    return translationsToRender.map((translation) => {
-      return (
-        <TranslationCard
-          translation={translation}
-          key={translation.id}
-          languages={this.props.languages}
-        />
-      );
+  handleChange = (event) => {
+    this.setState({
+      filter: event.target.value,
     });
   };
 
+  filterTranslations = () => {
+    let filter = this.state.filter;
+    let quizTranslations = this.props.translations;
+    if (filter === "all") {
+      return quizTranslations;
+    } else {
+      quizTranslations = quizTranslations.filter(
+        (translation) => translation.language.language === this.state.filter
+      );
+      return quizTranslations;
+    }
+  };
+
+  renderTranslations = () => {
+    return this.filterTranslations().map((translation) => {
+      return <TranslationCard translation={translation} key={translation.id} />;
+    });
+  };
+
+  filterByLanguage = () => {
+    let translations = this.props.translations;
+    let languages = translations.map(
+      (translation) => translation.language.language
+    );
+    let reducedLanguages = this.removeDuplicates(languages);
+    return reducedLanguages;
+  };
+
+  removeDuplicates = (array) => {
+    return array.filter((item, index) => array.indexOf(item) === index);
+  };
+
   render() {
-    console.log(this.props.translations);
     return (
       <div>
         <SavedTranslationsTitle>Saved Translations</SavedTranslationsTitle>
-        <FilterBar translations={this.props.translations} />
+        <FilterBar
+          languages={this.filterByLanguage()}
+          filter={this.state.filter}
+          handleChange={this.handleChange}
+        />
         <Grid>
           <Row>
             <Col>{this.renderTranslations()}</Col>

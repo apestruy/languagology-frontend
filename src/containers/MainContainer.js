@@ -47,7 +47,6 @@ class MainContainer extends React.Component {
               <ProfileContainer
                 {...props}
                 translations={this.state.translations}
-                languages={this.state.languages}
               />
             )}
           />

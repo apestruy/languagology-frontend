@@ -7,10 +7,7 @@ const ProfileContainer = (props) => {
   return (
     <div>
       <ProfTranslationsDiv>
-        <SavedTranslations
-          translations={props.translations}
-          languages={props.languages}
-        />
+        <SavedTranslations translations={props.translations} />
       </ProfTranslationsDiv>
       <ProfQuizDiv>
         <QuizResults />
