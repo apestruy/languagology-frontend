@@ -1,7 +1,7 @@
 import React from "react";
 import TranslationCard from "../components/TranslationCard";
 import FilterBar from "../components/FilterBar";
-import { Grid, Row, Col, SavedTranslationsTitle } from "../styled";
+import { GridSavedTranslations, Row, Col, ProfileTitle } from "../styled";
 
 class SavedTranslations extends React.Component {
   state = {
@@ -49,17 +49,17 @@ class SavedTranslations extends React.Component {
   render() {
     return (
       <div>
-        <SavedTranslationsTitle>Saved Translations</SavedTranslationsTitle>
+        <ProfileTitle>Saved Translations</ProfileTitle>
         <FilterBar
           languages={this.filterByLanguage()}
           filter={this.state.filter}
           handleChange={this.handleChange}
         />
-        <Grid>
+        <GridSavedTranslations>
           <Row>
             <Col>{this.renderTranslations()}</Col>
           </Row>
-        </Grid>
+        </GridSavedTranslations>
       </div>
     );
   }

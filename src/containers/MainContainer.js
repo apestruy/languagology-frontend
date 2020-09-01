@@ -13,6 +13,8 @@ class MainContainer extends React.Component {
     this.state = {
       languages: [],
       translations: [],
+      quizzes: [],
+      quizTranslations: [],
     };
   }
 
@@ -23,7 +25,20 @@ class MainContainer extends React.Component {
         fetch("http://localhost:3000/api/v1/languages")
           .then((resp) => resp.json())
           .then((languages) => {
-            this.setState({ languages: languages, translations: translations });
+            fetch("http://localhost:3000/api/v1/quizzes")
+              .then((resp) => resp.json())
+              .then((quizzes) => {
+                fetch("http://localhost:3000/api/v1/quiz_translations")
+                  .then((resp) => resp.json())
+                  .then((quizTranslations) => {
+                    this.setState({
+                      languages: languages,
+                      translations: translations,
+                      quizzes: quizzes,
+                      quizTranslations: quizTranslations,
+                    });
+                  });
+              });
           });
       });
   }
@@ -47,6 +62,8 @@ class MainContainer extends React.Component {
               <ProfileContainer
                 {...props}
                 translations={this.state.translations}
+                quizzes={this.state.quizzes}
+                quizTranslations={this.state.quizTranslations}
               />
             )}
           />
