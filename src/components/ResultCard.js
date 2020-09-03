@@ -1,6 +1,6 @@
 import React from "react";
 import ResultCardTranslations from "./ResultCardTranslations";
-import { GridQuizResults, Row, Col } from "../styled";
+import { GridQuizResults, Row, ScoreDiv, TranslationsDiv } from "../styled";
 
 class ResultCard extends React.Component {
   filterTranslations = () => {
@@ -27,9 +27,9 @@ class ResultCard extends React.Component {
     console.log(this.props.quiz);
     return (
       <div>
-        <div>Score: {this.props.quiz.score}/5</div>
+        <ScoreDiv>Score: {this.props.quiz.score}/5</ScoreDiv>
         <div>
-          Translations:
+          <TranslationsDiv>Translations:</TranslationsDiv>
           <GridQuizResults>
             <Row>
               <div>{this.renderTranslations()}</div>

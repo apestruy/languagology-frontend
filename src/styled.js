@@ -156,6 +156,7 @@ export const ProfQuizDiv = styled.div`
   flex-direction: column;
   overflow: scroll;
   background: #d4e7e3;
+  // background: #e3fcfe;
   //   background: #55bcc9;
   //   background-color: #84ceeb;
   //   background: #9ad7ef;
@@ -249,8 +250,9 @@ export const ResultsInputDiv = styled.div`
   text-align: left;
   padding-left: 21px;
   padding-right: 21px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   // border: 2px solid #a10303;
-  background: #ff6666;
 `;
 
 export const ResultsOutputDiv = styled.div`
@@ -262,6 +264,37 @@ export const ResultsOutputDiv = styled.div`
   text-align: left;
   padding-left: 21px;
   padding-right: 21px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   // border: 2px solid #a10303;
-  background: #ff6666;
+`;
+
+export const ScoreDiv = styled.div`
+  position: relative;
+  right: 260px;
+`;
+
+export const TranslationsDiv = styled.div`
+  position: relative;
+  right: 251px;
+`;
+
+export const Ol = styled.ol`
+  font-weight: 550;
+`;
+
+export const Li = styled.li`
+  // border: 2px solid #a10303;
+  // background: #d4e7e3;
+  background: #e3fcfe;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 12px;
+  width: 93%;
+  border-radius: 10px;
+`;
+
+export const ResultsDiv = styled.div`
+  margin-top: 4px;
+  margin-bottom: 4px;
 `;
