@@ -155,12 +155,12 @@ export const ProfQuizDiv = styled.div`
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  background: #d4e7e3;
-  // background: #e3fcfe;
-  //   background: #55bcc9;
-  //   background-color: #84ceeb;
-  //   background: #9ad7ef;
-  //   background: #b0dff2;
+  // background: #d4e7e3;
+  background: #e3fcfe;
+  // background: #55bcc9;
+  // background-color: #add8e6;
+  // background: #9ad7ef;
+  // background: #b0dff2;
 `;
 
 export const TranslationText = styled.p`
@@ -208,7 +208,7 @@ export const LanguageDiv = styled.div`
   font-size: 16px;
   font-weight: 650;
   color: #2d283e;
-  //   color: #46344e;
+  // color: #46344e;
 `;
 
 export const ProfileTitle = styled.div`
@@ -279,14 +279,20 @@ export const TranslationsDiv = styled.div`
   right: 251px;
 `;
 
+export const InstructionDiv = styled.div`
+  position: absolute;
+  display: inline;
+  color: #9b0303;
+`;
+
 export const Ol = styled.ol`
   font-weight: 550;
 `;
 
 export const Li = styled.li`
   // border: 2px solid #a10303;
-  // background: #d4e7e3;
-  background: #e3fcfe;
+  background: #d4e7e3;
+  // background: #e3fcfe;
   margin-top: 40px;
   margin-bottom: 40px;
   padding: 12px;

@@ -13,6 +13,7 @@ const ProfileContainer = (props) => {
         <QuizResults
           quizzes={props.quizzes}
           quizTranslations={props.quizTranslations}
+          translations={props.translations}
         />
       </ProfQuizDiv>
     </div>

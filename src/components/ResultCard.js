@@ -1,6 +1,12 @@
 import React from "react";
 import ResultCardTranslations from "./ResultCardTranslations";
-import { GridQuizResults, Row, ScoreDiv, TranslationsDiv } from "../styled";
+import {
+  GridQuizResults,
+  Row,
+  ScoreDiv,
+  TranslationsDiv,
+  InstructionDiv,
+} from "../styled";
 
 class ResultCard extends React.Component {
   filterTranslations = () => {
@@ -17,16 +23,18 @@ class ResultCard extends React.Component {
         <ResultCardTranslations
           translation={translation}
           key={translation.id}
+          translations={this.props.translations}
         />
       );
     });
   };
 
   render() {
-    console.log(this.props.quizTranslations);
-    console.log(this.props.quiz);
     return (
       <div>
+        <InstructionDiv>
+          Click on translation to see the language
+        </InstructionDiv>
         <ScoreDiv>Score: {this.props.quiz.score}/5</ScoreDiv>
         <div>
           <TranslationsDiv>Translations:</TranslationsDiv>

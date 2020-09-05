@@ -11,6 +11,7 @@ class QuizResults extends React.Component {
           <ResultCard
             quiz={quiz}
             quizTranslations={this.props.quizTranslations}
+            translations={this.props.translations}
           />
         </Li>
       );

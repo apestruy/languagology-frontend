@@ -99,11 +99,14 @@ class TranslationForm extends React.Component {
   };
 
   render() {
-    console.log(this.state);
-    console.log(this.props.languages);
     return (
       <div>
-        <Translateh2>Translate and Save Your Translations Here 😊</Translateh2>
+        <Translateh2>
+          Translate and Save Your Translations Here{" "}
+          <span role="img" aria-label="happy">
+            😊
+          </span>
+        </Translateh2>
         <div>
           <form onSubmit={this.fetchApi}>
             <SelectDiv>
