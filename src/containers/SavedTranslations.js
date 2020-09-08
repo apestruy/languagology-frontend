@@ -21,7 +21,7 @@ class SavedTranslations extends React.Component {
       return quizTranslations;
     } else {
       quizTranslations = quizTranslations.filter(
-        (translation) => translation.language.language === this.state.filter
+        (translation) => translation.language.language === filter
       );
       return quizTranslations;
     }

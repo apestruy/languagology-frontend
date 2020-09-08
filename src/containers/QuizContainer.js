@@ -6,10 +6,9 @@ import Score from "../components/Score";
 const QuizContainer = (props) => {
   return (
     <div>
-      <div> QuizContainer </div>
+      <Score score={props.score} />
       <KeyList />
       <ValueList />
-      <Score />
     </div>
   );
 };
