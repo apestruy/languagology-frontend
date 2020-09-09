@@ -4,6 +4,7 @@ import ValueList from "../components/ValueList";
 import Score from "../components/Score";
 
 const QuizContainer = (props) => {
+  console.log(props.quizTranslations);
   return (
     <div>
       <Score score={props.score} />

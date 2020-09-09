@@ -1,11 +1,12 @@
 import React from "react";
 import QuizContainer from "./QuizContainer";
-import { Select, FilterSelect } from "../styled";
+import { FilterSelect } from "../styled";
 
 class QuizPage extends React.Component {
   state = {
     start: false,
     quizLanguage: "mixed",
+    quizTranslations: [],
     score: 0,
   };
 
@@ -67,8 +68,8 @@ class QuizPage extends React.Component {
       return (
         <h2 style={{ color: "#74131d" }}>
           There must be at least 5 translations per language for each quiz.
-          Please save at least {5 - this.filterTranslations().length} more
-          translations in {this.state.quizLanguage}.
+          Please save {5 - this.filterTranslations().length} more translations
+          in {this.state.quizLanguage}.
         </h2>
       );
     }
@@ -81,7 +82,6 @@ class QuizPage extends React.Component {
   };
 
   render() {
-    console.log(this.props.translations);
     console.log(this.state);
     return (
       <div>
@@ -103,7 +103,12 @@ class QuizPage extends React.Component {
           })}
         </FilterSelect>
         {this.renderQuiz()}
-        {this.state.start && <QuizContainer score={this.state.score} />}
+        {this.state.start && (
+          <QuizContainer
+            score={this.state.score}
+            quizTranslations={this.filterTranslations()}
+          />
+        )}
       </div>
     );
   }
