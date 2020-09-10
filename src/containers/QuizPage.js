@@ -6,12 +6,16 @@ class QuizPage extends React.Component {
   state = {
     start: false,
     quizLanguage: "mixed",
-    quizTranslations: [],
     score: 0,
+    randomKeys: [],
+    randomValues: [],
   };
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value, start: false });
+    this.setState({
+      [event.target.name]: event.target.value,
+      start: false,
+    });
   };
 
   updateScore = (score) => {
@@ -50,7 +54,9 @@ class QuizPage extends React.Component {
     if (this.filterTranslations().length > 4) {
       return (
         <div>
-          <button onClick={this.beginQuiz}>Begin Quiz</button>
+          {!this.state.start && (
+            <button onClick={this.beginQuiz}>Begin Quiz</button>
+          )}
         </div>
       );
     } else if (
@@ -58,11 +64,11 @@ class QuizPage extends React.Component {
       this.state.quizLanguage === "mixed"
     ) {
       return (
-        <div>
+        <h2 style={{ color: "#74131d" }}>
           There must be at least 5 translations per quiz. Please save{" "}
           {5 - this.filterTranslations().length} translations on the Translate
           Page
-        </div>
+        </h2>
       );
     } else {
       return (
@@ -76,37 +82,55 @@ class QuizPage extends React.Component {
   };
 
   beginQuiz = () => {
+    const translations = this.filterTranslations();
+    let randomized = translations.sort(() => Math.random() - 0.5);
+    let randomFiveTranslations = [];
+    for (let i = 0; i < 5; i++) {
+      randomFiveTranslations.push(randomized[i]);
+    }
+    const keys = [...randomFiveTranslations];
+    const values = [...randomFiveTranslations];
+    let randomKeys = keys.sort(() => Math.random() - 0.5);
+    let randomValues = values.sort(() => Math.random() - 0.5);
     this.setState({
+      randomKeys: randomKeys,
+      randomValues: randomValues,
       start: true,
     });
   };
 
   render() {
+    console.log(this.props.translations);
     console.log(this.state);
     return (
       <div>
         <h2> Get Quizzed On Your Translations </h2>
-        <h3>Must have a minimum of 5 translations saved</h3>
-        <h3>Pick the language you would like to be quizzed in</h3>
-        <FilterSelect
-          name="quizLanguage"
-          value={this.state.quizLanguage}
-          onChange={this.handleChange}
-        >
-          <option value="mixed">Mix Them Up</option>
-          {this.filterByLanguage().map((language) => {
-            return (
-              <option key={language} value={language}>
-                {language}
-              </option>
-            );
-          })}
-        </FilterSelect>
+        {!this.state.start && (
+          <div>
+            <h3>Must have a minimum of 5 translations saved</h3>
+            <h3>Pick the language you would like to be quizzed in</h3>
+            <FilterSelect
+              name="quizLanguage"
+              value={this.state.quizLanguage}
+              onChange={this.handleChange}
+            >
+              <option value="mixed">Mix Them Up</option>
+              {this.filterByLanguage().map((language) => {
+                return (
+                  <option key={language} value={language}>
+                    {language}
+                  </option>
+                );
+              })}
+            </FilterSelect>
+          </div>
+        )}
         {this.renderQuiz()}
         {this.state.start && (
           <QuizContainer
             score={this.state.score}
-            quizTranslations={this.filterTranslations()}
+            keys={this.state.randomKeys}
+            values={this.state.randomValues}
           />
         )}
       </div>
