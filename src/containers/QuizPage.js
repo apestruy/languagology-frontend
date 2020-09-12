@@ -1,6 +1,9 @@
 import React from "react";
-import QuizContainer from "./QuizContainer";
+import Timer from "./Timer";
 import { FilterSelect } from "../styled";
+import Score from "../components/Score";
+import KeyList from "../components/KeyList";
+import ValueList from "../components/ValueList";
 
 class QuizPage extends React.Component {
   state = {
@@ -127,11 +130,12 @@ class QuizPage extends React.Component {
         )}
         {this.renderQuiz()}
         {this.state.start && (
-          <QuizContainer
-            score={this.state.score}
-            keys={this.state.randomKeys}
-            values={this.state.randomValues}
-          />
+          <div>
+            <Timer />
+            <Score score={this.state.score} />
+            <KeyList keys={this.state.randomKeys} />
+            <ValueList values={this.state.randomValues} />
+          </div>
         )}
       </div>
     );

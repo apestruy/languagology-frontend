@@ -1,21 +1,22 @@
 import React from "react";
-import KeyList from "../components/KeyList";
-import ValueList from "../components/ValueList";
-import Score from "../components/Score";
 
-class QuizContainer extends React.Component {
+class Timer extends React.Component {
   state = {
     seconds: 30,
+    quizDone: false,
   };
 
   componentDidMount() {
     this.countDown = setInterval(() => {
-      const { seconds } = this.state;
+      const { seconds, quizDone } = this.state;
 
       if (seconds > 0) {
         this.setState(({ seconds }) => ({ seconds: seconds - 1 }));
       }
       if (seconds === 0) {
+        clearInterval(this.countDown);
+      }
+      if (quizDone === true) {
         clearInterval(this.countDown);
       }
     }, 1000);
@@ -25,17 +26,18 @@ class QuizContainer extends React.Component {
     clearInterval(this.countDown);
   }
 
+  handleClick = () => {
+    this.setState({ quizDone: true });
+  };
+
   render() {
-    // console.log(this.state);
     return (
       <div>
         <div>Time Remaining: {this.state.seconds} </div>
-        <Score score={this.props.score} />
-        <KeyList />
-        <ValueList />
+        <button onClick={this.handleClick}>Done</button>
       </div>
     );
   }
 }
 
-export default QuizContainer;
+export default Timer;
