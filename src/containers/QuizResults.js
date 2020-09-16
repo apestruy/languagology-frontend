@@ -20,7 +20,6 @@ class QuizResults extends React.Component {
   };
 
   render() {
-    // console.log(this.props.quizTranslations);
     return (
       <div>
         <ProfileTitle>Quiz Results</ProfileTitle>

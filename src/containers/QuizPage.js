@@ -1,6 +1,6 @@
 import React from "react";
 import Timer from "./Timer";
-import { FilterSelect } from "../styled";
+import { FilterSelect, Ul, KeysDiv, ValuesDiv } from "../styled";
 import Score from "../components/Score";
 import KeyList from "../components/KeyList";
 import ValueList from "../components/ValueList";
@@ -12,6 +12,9 @@ class QuizPage extends React.Component {
     score: 0,
     randomKeys: [],
     randomValues: [],
+    clickedKey: "",
+    clickedValue: "",
+    correctArray: [],
   };
 
   handleChange = (event) => {
@@ -24,6 +27,29 @@ class QuizPage extends React.Component {
   updateScore = (score) => {
     this.setState({
       score: score,
+    });
+  };
+
+  setClickedKey = (key) => {
+    if (this.state.clickedKey === "") {
+      this.setState({ clickedKey: key });
+    }
+  };
+
+  setClickedValue = (value) => {
+    if (this.state.clickedValue === "") {
+      this.setState({ clickedValue: value });
+    }
+  };
+
+  clearClicks = (key) => {
+    const correctArray = [...this.state.correctArray];
+    correctArray.push(this.state.clickedKey);
+    correctArray.push(this.state.clickedValue);
+    this.setState({
+      correctArray: correctArray,
+      clickedKey: key,
+      clickedValue: "",
     });
   };
 
@@ -102,9 +128,56 @@ class QuizPage extends React.Component {
     });
   };
 
+  matchCheck = () => {
+    if (
+      this.state.clickedKey === this.state.clickedValue &&
+      this.state.clickedKey !== ""
+    ) {
+      return true;
+    }
+  };
+
+  renderKeys = () => {
+    let keysToRender = this.state.randomKeys;
+    let listItems = keysToRender.map((input) => {
+      return (
+        <li key={input.id}>
+          <KeyList
+            input={input}
+            setClickedKey={this.setClickedKey}
+            clickedKey={this.state.clickedKey}
+            matchCheck={this.matchCheck()}
+            clearClicks={this.clearClicks}
+            correctArray={this.state.correctArray}
+          />
+        </li>
+      );
+    });
+    return <Ul>{listItems}</Ul>;
+  };
+
+  renderValues = () => {
+    let valuesToRender = this.state.randomValues;
+    let listItems = valuesToRender.map((output) => {
+      return (
+        <li key={output.id}>
+          <ValueList
+            output={output}
+            setClickedValue={this.setClickedValue}
+            clickedValue={this.state.clickedValue}
+            matchCheck={this.matchCheck()}
+            correctArray={this.state.correctArray}
+          />
+        </li>
+      );
+    });
+    return <Ul>{listItems}</Ul>;
+  };
+
   render() {
-    console.log(this.props.translations);
-    console.log(this.state);
+    console.log(this.state.correctArray);
+    console.log(this.state.clickedKey);
+    console.log(this.state.clickedValue);
     return (
       <div>
         <h2> Get Quizzed On Your Translations </h2>
@@ -133,10 +206,11 @@ class QuizPage extends React.Component {
           <div>
             <Timer />
             <Score score={this.state.score} />
-            <KeyList keys={this.state.randomKeys} />
-            <ValueList values={this.state.randomValues} />
+            <KeysDiv>{this.renderKeys()}</KeysDiv>
+            <ValuesDiv>{this.renderValues()}</ValuesDiv>
           </div>
         )}
+        {/* {this.correctArray()} */}
       </div>
     );
   }

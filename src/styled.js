@@ -304,3 +304,41 @@ export const ResultsDiv = styled.div`
   margin-top: 4px;
   margin-bottom: 4px;
 `;
+
+export const Ul = styled.ul`
+  font-weight: 550;
+  list-style-type: none;
+`;
+
+export const KeysLi = styled.div`
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 14px;
+  height: 1.6em;
+  width: 25em;
+  border-radius: 10px;
+  background-color: #d4e7e3;
+`;
+
+export const ValuesLi = styled.div`
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 14px;
+  height: 1.6em;
+  width: 25em;
+  border-radius: 10px;
+  background-color: #d4e7e3;
+`;
+
+export const KeysDiv = styled.div`
+  position: absolute;
+  text-align: left;
+  left: 300px;
+`;
+
+export const ValuesDiv = styled.div`
+  position: relative;
+  display: inline-block;
+  text-align: left;
+  left: 280px;
+`;
