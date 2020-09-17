@@ -10,6 +10,12 @@ class ValueList extends React.Component {
     if (!this.state.click && this.props.clickedValue === "") {
       this.props.setClickedValue(this.props.output.id);
       this.setState({ click: true });
+    } else if (
+      this.state.click &&
+      this.props.valuesToUnclick.some((id) => id === this.props.output.id)
+    ) {
+      console.log("CHECK THIS");
+      this.props.setClickedValue(this.props.output.id);
     }
   };
 

@@ -15,6 +15,23 @@ class QuizPage extends React.Component {
     clickedKey: "",
     clickedValue: "",
     correctArray: [],
+    wrongArray: [],
+    valuesToUnclick: [],
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      prevState.clickedValue !== this.state.clickedValue &&
+      this.matchCheck()
+    ) {
+      this.updateScore(1);
+    } else if (
+      prevState.clickedValue !== this.state.clickedValue &&
+      this.state.clickedValue !== "" &&
+      !this.matchCheck()
+    ) {
+      this.clearClicksWrong();
+    }
   };
 
   handleChange = (event) => {
@@ -25,8 +42,9 @@ class QuizPage extends React.Component {
   };
 
   updateScore = (score) => {
+    let updatedScore = this.state.score + score;
     this.setState({
-      score: score,
+      score: updatedScore,
     });
   };
 
@@ -42,15 +60,23 @@ class QuizPage extends React.Component {
     }
   };
 
-  clearClicks = (key) => {
+  clearClicksCorrect = (key) => {
     const correctArray = [...this.state.correctArray];
     correctArray.push(this.state.clickedKey);
-    correctArray.push(this.state.clickedValue);
+    // correctArray.push(this.state.clickedValue);
     this.setState({
       correctArray: correctArray,
       clickedKey: key,
       clickedValue: "",
     });
+  };
+
+  clearClicksWrong = () => {
+    const wrongArray = [...this.state.wrongArray];
+    wrongArray.push(this.state.clickedKey);
+    const valuesToUnclick = [...this.state.valuesToUnclick];
+    valuesToUnclick.push(this.state.clickedValue);
+    this.setState({ wrongArray: wrongArray, valuesToUnclick: valuesToUnclick });
   };
 
   filterByLanguage = () => {
@@ -95,16 +121,16 @@ class QuizPage extends React.Component {
       return (
         <h2 style={{ color: "#74131d" }}>
           There must be at least 5 translations per quiz. Please save{" "}
-          {5 - this.filterTranslations().length} translations on the Translate
-          Page
+          {5 - this.filterTranslations().length} translation&#x28;s&#x29; on the
+          Translate Page
         </h2>
       );
     } else {
       return (
         <h2 style={{ color: "#74131d" }}>
           There must be at least 5 translations per language for each quiz.
-          Please save {5 - this.filterTranslations().length} more translations
-          in {this.state.quizLanguage}.
+          Please save {5 - this.filterTranslations().length} more
+          translation&#x28;s&#x29; in {this.state.quizLanguage}.
         </h2>
       );
     }
@@ -147,7 +173,7 @@ class QuizPage extends React.Component {
             setClickedKey={this.setClickedKey}
             clickedKey={this.state.clickedKey}
             matchCheck={this.matchCheck()}
-            clearClicks={this.clearClicks}
+            clearClicksCorrect={this.clearClicksCorrect}
             correctArray={this.state.correctArray}
           />
         </li>
@@ -167,6 +193,7 @@ class QuizPage extends React.Component {
             clickedValue={this.state.clickedValue}
             matchCheck={this.matchCheck()}
             correctArray={this.state.correctArray}
+            valuesToUnclick={this.state.valuesToUnclick}
           />
         </li>
       );
@@ -176,6 +203,7 @@ class QuizPage extends React.Component {
 
   render() {
     console.log(this.state.correctArray);
+    console.log(this.state.wrongArray, this.state.valuesToUnclick);
     console.log(this.state.clickedKey);
     console.log(this.state.clickedValue);
     return (
@@ -210,7 +238,6 @@ class QuizPage extends React.Component {
             <ValuesDiv>{this.renderValues()}</ValuesDiv>
           </div>
         )}
-        {/* {this.correctArray()} */}
       </div>
     );
   }

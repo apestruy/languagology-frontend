@@ -4,7 +4,6 @@ import { KeysLi } from "../styled";
 class KeyList extends React.Component {
   state = {
     click: false,
-    done: false,
   };
 
   handleClick = () => {
@@ -12,7 +11,8 @@ class KeyList extends React.Component {
       this.props.setClickedKey(this.props.input.id);
       this.setState({ click: true });
     } else if (!this.state.click && this.props.matchCheck) {
-      this.props.clearClicks(this.props.input.id);
+      this.props.clearClicksCorrect(this.props.input.id);
+      this.setState({ click: true });
     }
   };
 
