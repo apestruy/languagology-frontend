@@ -27,15 +27,16 @@ export const SelectDiv = styled.div`
 `;
 
 export const Select = styled.select`
-  border-radius: 5px;
+  border-radius: 8px;
   margin: 1rem;
-  width: 11em;
-  height: 2.5em;
-  font-size: 16px;
+  width: 12em;
+  height: 2.8em;
+  font-size: 17px;
   font-weight: 550;
-  padding-left: 5px;
-  background: #97caef;
-  border: 1px solid black;
+  padding-left: 9px;
+  // color: black;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
 `;
 
 export const FilterDiv = styled.div`
@@ -59,7 +60,8 @@ export const FilterSelect = styled.select`
   font-size: 16px;
   font-weight: 550;
   padding-left: 5px;
-  background: #add8e6;
+  // background: #e3fcfe;
+  background: white;
   border: 1px solid black;
 `;
 
@@ -103,14 +105,14 @@ export const ClearButton = styled.button`
 
 export const Translateh2 = styled.h2`
   font-family: "Helvetica";
-  font-size: 21px;
-  //   color: #333333;
+  font-size: 29px;
+  color: white;
 `;
 
 export const AppNameH1 = styled.h1`
-  color: #b40304;
-  //   color: #46344e;
-  //   color: #78244c;
+  // color: #b40304;
+  color: white;
+  // color: #e3fcfe;
   font-size: 55px;
   //   font-family: "sans-serif";
 `;
@@ -120,12 +122,15 @@ export const NavButton = styled.button`
   margin: 2em;
   width: 7em;
   height: 2em;
-  // border: 2px solid #a10303;
   border-radius: 9px;
   position: relative;
   top: 26px;
   font-family: "sans-serif";
-  background-color: #e7e3d4;
+  // color: #e3fcfe;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #e3fcfe;
+  // background-color: #e7e3d4;
   //   background-color: #a2dbe1;
   //   background-color: #f5e6cc;
   //   background-color: #eae7dc;
@@ -140,8 +145,9 @@ export const ProfTranslationsDiv = styled.div`
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  background: #d4e7e3;
-  //   background: #3feee6;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid white;
+  // background: #d4e7e3;
   //   background: #a2dbe1;
   //   background: #9ad7ef;
 `;
@@ -155,8 +161,10 @@ export const ProfQuizDiv = styled.div`
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid white;
   // background: #d4e7e3;
-  background: #e3fcfe;
+  // background: #e3fcfe;
   // background: #55bcc9;
   // background-color: #add8e6;
   // background: #9ad7ef;
@@ -177,8 +185,8 @@ export const InputDiv = styled.div`
   left: 20px;
   width: 15em;
   border-radius: 5px;
-  background: #e3fcfe;
-  color: #2d283e;
+  background: white;
+  // color: #2d283e;
   //   background: #cafafe;
   //   background: #d2fdff;
   //   color: #5d6985;
@@ -190,7 +198,9 @@ export const OutputDiv = styled.div`
   left: 250px;
   width: 15em;
   border-radius: 5px;
-  background-color: #e3fcfe;
+  background: white;
+  // background-color: #e3fcfe;
+  // color: #0243b0;
   color: #a10310;
   //   background: #cafafe;
   //   background: #d2fdff;
@@ -207,8 +217,6 @@ export const LanguageDiv = styled.div`
   width: 10em;
   font-size: 16px;
   font-weight: 650;
-  color: #2d283e;
-  // color: #46344e;
 `;
 
 export const ProfileTitle = styled.div`
@@ -216,8 +224,8 @@ export const ProfileTitle = styled.div`
   top: 21px;
   font-size: 26px;
   font-weight: 650;
-  //   color: #46344e;
-  //   color: #2d283e;
+  // color: #a10310;
+  // color: #2d283e;
 `;
 
 export const GridSavedTranslations = styled.div`
@@ -274,15 +282,11 @@ export const ScoreDiv = styled.div`
   right: 260px;
 `;
 
-export const TranslationsDiv = styled.div`
-  position: relative;
-  right: 251px;
-`;
-
 export const InstructionDiv = styled.div`
   position: absolute;
   display: inline;
-  color: #9b0303;
+  // color: #0243b0;
+  color: #a10310;
 `;
 
 export const Ol = styled.ol`
@@ -291,7 +295,7 @@ export const Ol = styled.ol`
 
 export const Li = styled.li`
   // border: 2px solid #a10303;
-  background: #d4e7e3;
+  background: white;
   // background: #e3fcfe;
   margin-top: 40px;
   margin-bottom: 40px;

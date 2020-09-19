@@ -12,7 +12,7 @@ class ResultCardTranslations extends React.Component {
 
   render() {
     const backgroundColor =
-      this.props.translation.correct === "yes" ? "#85e085" : "#ff7676";
+      this.props.translation.correct === "yes" ? "#08edbd" : "#fd7f7e";
 
     const languageObj = this.props.translations.find(
       (translation) => translation.id === this.props.translation.translation.id

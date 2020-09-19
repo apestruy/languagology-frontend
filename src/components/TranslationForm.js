@@ -102,7 +102,7 @@ class TranslationForm extends React.Component {
     return (
       <div>
         <Translateh2>
-          Translate and Save Your Translations Here{" "}
+          Translate And Save Your Translations Here{" "}
           <span role="img" aria-label="happy">
             😊
           </span>
@@ -115,7 +115,7 @@ class TranslationForm extends React.Component {
                 value={this.state.chosenLanguage}
                 onChange={this.handleChange}
               >
-                <option value="">Select Language:</option>
+                <option value="">Select a Language:</option>
                 {this.props.languages.map((language) => {
                   return (
                     <option key={language.id} value={language.language_code}>

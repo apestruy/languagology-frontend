@@ -37,7 +37,6 @@ class ResultCard extends React.Component {
         </InstructionDiv>
         <ScoreDiv>Score: {this.props.quiz.score}/5</ScoreDiv>
         <div>
-          <TranslationsDiv>Translations:</TranslationsDiv>
           <GridQuizResults>
             <Row>
               <div>{this.renderTranslations()}</div>
