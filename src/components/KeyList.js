@@ -13,11 +13,21 @@ class KeyList extends React.Component {
     } else if (!this.state.click && this.props.matchCheck) {
       this.props.clearClicksCorrect(this.props.input.id);
       this.setState({ click: true });
+    } else if (
+      !this.state.click &&
+      !this.props.matchCheck &&
+      this.props.clickedKey !== "" &&
+      this.props.clickedValue !== ""
+    ) {
+      this.props.clearClicksWrong(this.props.input.id);
+      this.setState({ click: true });
     }
   };
 
   colorSelectedKey = () => {
-    if (
+    if (this.props.wrongArray.some((id) => id === this.props.input.id)) {
+      return "#fd7f7e";
+    } else if (
       this.props.clickedKey === this.props.input.id &&
       !this.props.matchCheck
     ) {
@@ -31,6 +41,8 @@ class KeyList extends React.Component {
       this.props.correctArray.some((id) => id === this.props.input.id)
     ) {
       return "#1eb65b";
+    } else if (this.props.wrongArray.some((id) => id === this.props.input.id)) {
+      return "#fd7f7e";
     }
   };
 

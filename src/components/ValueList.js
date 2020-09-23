@@ -4,17 +4,23 @@ import { ValuesLi } from "../styled";
 class ValueList extends React.Component {
   state = {
     click: false,
+    colored: false,
   };
 
   handleClick = () => {
-    if (!this.state.click && this.props.clickedValue === "") {
+    if (
+      this.colorSelectedValue() === "#fd7f7e" ||
+      this.colorSelectedValue() === "#1eb65b"
+    ) {
+      this.setState({ colored: true });
+    } else if (!this.state.click && this.props.clickedValue === "") {
       this.props.setClickedValue(this.props.output.id);
       this.setState({ click: true });
     } else if (
       this.state.click &&
+      !this.state.colored &&
       this.props.valuesToUnclick.some((id) => id === this.props.output.id)
     ) {
-      console.log("CHECK THIS");
       this.props.setClickedValue(this.props.output.id);
     }
   };
@@ -29,11 +35,15 @@ class ValueList extends React.Component {
       this.props.correctArray.some((id) => id === this.props.output.id)
     ) {
       return "#1eb65b";
+    } else if (
+      this.props.wrongArray.some((id) => id === this.props.output.id)
+    ) {
+      return "#fd7f7e";
     }
   };
 
   render() {
-    console.log(this.props.output.id, this.state);
+    console.log(this.props.output.id);
     return (
       <ValuesLi
         style={{ background: this.colorSelectedValue() }}

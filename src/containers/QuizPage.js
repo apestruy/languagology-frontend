@@ -30,7 +30,7 @@ class QuizPage extends React.Component {
       this.state.clickedValue !== "" &&
       !this.matchCheck()
     ) {
-      this.clearClicksWrong();
+      this.setClicksWrong();
     }
   };
 
@@ -41,8 +41,8 @@ class QuizPage extends React.Component {
     });
   };
 
-  updateScore = (score) => {
-    let updatedScore = this.state.score + score;
+  updateScore = (point) => {
+    let updatedScore = this.state.score + point;
     this.setState({
       score: updatedScore,
     });
@@ -71,12 +71,16 @@ class QuizPage extends React.Component {
     });
   };
 
-  clearClicksWrong = () => {
+  setClicksWrong = () => {
     const wrongArray = [...this.state.wrongArray];
     wrongArray.push(this.state.clickedKey);
     const valuesToUnclick = [...this.state.valuesToUnclick];
     valuesToUnclick.push(this.state.clickedValue);
     this.setState({ wrongArray: wrongArray, valuesToUnclick: valuesToUnclick });
+  };
+
+  clearClicksWrong = (key) => {
+    this.setState({ clickedKey: key, clickedValue: "" });
   };
 
   filterByLanguage = () => {
@@ -172,9 +176,12 @@ class QuizPage extends React.Component {
             input={input}
             setClickedKey={this.setClickedKey}
             clickedKey={this.state.clickedKey}
+            clickedValue={this.state.clickedValue}
             matchCheck={this.matchCheck()}
             clearClicksCorrect={this.clearClicksCorrect}
+            clearClicksWrong={this.clearClicksWrong}
             correctArray={this.state.correctArray}
+            wrongArray={this.state.wrongArray}
           />
         </li>
       );
@@ -194,6 +201,7 @@ class QuizPage extends React.Component {
             matchCheck={this.matchCheck()}
             correctArray={this.state.correctArray}
             valuesToUnclick={this.state.valuesToUnclick}
+            wrongArray={this.state.wrongArray}
           />
         </li>
       );
@@ -202,10 +210,10 @@ class QuizPage extends React.Component {
   };
 
   render() {
-    console.log(this.state.correctArray);
-    console.log(this.state.wrongArray, this.state.valuesToUnclick);
-    console.log(this.state.clickedKey);
-    console.log(this.state.clickedValue);
+    console.log("CORRECT:", this.state.correctArray);
+    console.log("WRONG:", this.state.wrongArray);
+    // console.log(this.state.clickedKey);
+    // console.log(this.state.clickedValue);
     return (
       <div>
         <h2> Get Quizzed On Your Translations </h2>
