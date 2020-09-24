@@ -7,17 +7,26 @@ class KeyList extends React.Component {
   };
 
   handleClick = () => {
-    if (!this.state.click && this.props.clickedKey === "") {
+    if (
+      !this.state.click &&
+      this.props.clickedKey === "" &&
+      !this.props.timesUp
+    ) {
       this.props.setClickedKey(this.props.input.id);
       this.setState({ click: true });
-    } else if (!this.state.click && this.props.matchCheck) {
+    } else if (
+      !this.state.click &&
+      this.props.matchCheck &&
+      !this.props.timesUp
+    ) {
       this.props.clearClicksCorrect(this.props.input.id);
       this.setState({ click: true });
     } else if (
       !this.state.click &&
       !this.props.matchCheck &&
       this.props.clickedKey !== "" &&
-      this.props.clickedValue !== ""
+      this.props.clickedValue !== "" &&
+      !this.props.timesUp
     ) {
       this.props.clearClicksWrong(this.props.input.id);
       this.setState({ click: true });

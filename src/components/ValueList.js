@@ -10,16 +10,22 @@ class ValueList extends React.Component {
   handleClick = () => {
     if (
       this.colorSelectedValue() === "#fd7f7e" ||
-      this.colorSelectedValue() === "#1eb65b"
+      (this.colorSelectedValue() === "#1eb65b" && !this.props.timesUp)
     ) {
       this.setState({ colored: true });
-    } else if (!this.state.click && this.props.clickedValue === "") {
+    } else if (
+      !this.state.click &&
+      this.props.clickedValue === "" &&
+      !this.props.timesUp
+    ) {
       this.props.setClickedValue(this.props.output.id);
       this.setState({ click: true });
     } else if (
       this.state.click &&
       !this.state.colored &&
-      this.props.valuesToUnclick.some((id) => id === this.props.output.id)
+      this.props.valuesToUnclick.some(
+        (id) => id === this.props.output.id && !this.props.timesUp
+      )
     ) {
       this.props.setClickedValue(this.props.output.id);
     }

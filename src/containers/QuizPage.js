@@ -17,6 +17,9 @@ class QuizPage extends React.Component {
     correctArray: [],
     wrongArray: [],
     valuesToUnclick: [],
+    finalCorrectArray: [],
+    timesUp: false,
+    quizComplete: false,
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -25,12 +28,19 @@ class QuizPage extends React.Component {
       this.matchCheck()
     ) {
       this.updateScore(1);
+      this.setFinalCorrectArray();
     } else if (
       prevState.clickedValue !== this.state.clickedValue &&
       this.state.clickedValue !== "" &&
       !this.matchCheck()
     ) {
       this.setClicksWrong();
+    } else if (
+      this.state.finalCorrectArray.length + this.state.wrongArray.length ===
+        5 &&
+      !this.state.quizComplete
+    ) {
+      this.setState({ quizComplete: true });
     }
   };
 
@@ -71,6 +81,10 @@ class QuizPage extends React.Component {
     });
   };
 
+  clearClicksWrong = (key) => {
+    this.setState({ clickedKey: key, clickedValue: "" });
+  };
+
   setClicksWrong = () => {
     const wrongArray = [...this.state.wrongArray];
     wrongArray.push(this.state.clickedKey);
@@ -79,8 +93,10 @@ class QuizPage extends React.Component {
     this.setState({ wrongArray: wrongArray, valuesToUnclick: valuesToUnclick });
   };
 
-  clearClicksWrong = (key) => {
-    this.setState({ clickedKey: key, clickedValue: "" });
+  setFinalCorrectArray = () => {
+    const correctArray = [...this.state.finalCorrectArray];
+    correctArray.push(this.state.clickedKey);
+    this.setState({ finalCorrectArray: correctArray });
   };
 
   filterByLanguage = () => {
@@ -167,6 +183,129 @@ class QuizPage extends React.Component {
     }
   };
 
+  timesUp = () => {
+    this.setState({ timesUp: true });
+  };
+
+  handleClick = () => {
+    const keys = this.state.randomKeys;
+    const allIDs = keys.map((key) => key.id);
+    const correctIDs = this.state.finalCorrectArray;
+    const wrongIDs = allIDs.filter((x) => correctIDs.indexOf(x) === -1);
+    console.log("ALL IDS:", allIDs);
+    console.log("CORRECT ID:", correctIDs);
+    console.log("WRONG IDS:", wrongIDs);
+    fetch("http://localhost:3000/api/v1/quizzes", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        score: this.state.score,
+        user_id: 1,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((newQuiz) => {
+        this.props.handleNewQuizzes(newQuiz);
+
+        correctIDs.map((id) => {
+          return fetch("http://localhost:3000/api/v1/quiz_translations", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              quiz_id: newQuiz.id,
+              translation_id: id,
+              correct: "yes",
+            }),
+          })
+            .then((resp) => resp.json())
+            .then((newQT) => {
+              this.props.handleNewQuizTranslations(newQT);
+            });
+        });
+        wrongIDs.map((id) => {
+          return fetch("http://localhost:3000/api/v1/quiz_translations", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              quiz_id: newQuiz.id,
+              translation_id: id,
+              correct: "no",
+            }),
+          })
+            .then((resp) => resp.json())
+            .then((newQT2) => {
+              this.props.handleNewQuizTranslations(newQT2);
+            });
+        });
+      });
+  };
+
+  //   saveQuizResults = () => {
+  //     fetch("http://localhost:3000/api/v1/quizzes", {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         score: this.state.score,
+  //         user_id: 1,
+  //       }),
+  //     })
+  //       .then((resp) => resp.json())
+  //       .then((newQuiz) => {
+  //         this.props.handleNewQuizzes(newQuiz);
+
+  //           this.state.finalCorrectArray.map((id) => {
+  //             return fetch("http://localhost:3000/api/v1/quiz_translations", {
+  //               method: "POST",
+  //               headers: {
+  //                 Accept: "application/json",
+  //                 "Content-Type": "application/json",
+  //               },
+  //               body: JSON.stringify({
+  //                 quiz_id: newQuiz.id,
+  //                 translation_id: id,
+  //                 correct: "yes",
+  //               }),
+  //             })
+  //               .then((resp) => resp.json())
+  //               .then((newQT) => {
+  //                 this.props.handleNewQuizTranslations(newQT);
+  //               });
+  //           });
+  //           this.state.wrongArray.map((id) => {
+  //             return fetch("http://localhost:3000/api/v1/quiz_translations", {
+  //               method: "POST",
+  //               headers: {
+  //                 Accept: "application/json",
+  //                 "Content-Type": "application/json",
+  //               },
+  //               body: JSON.stringify({
+  //                 quiz_id: newQuiz.id,
+  //                 translation_id: id,
+  //                 correct: "no",
+  //               }),
+  //             })
+  //               .then((resp) => resp.json())
+  //               .then((newQT2) => {
+  //                 this.props.handleNewQuizTranslations(newQT2);
+  //               });
+  //           });
+  //       });
+
+  //     // console.log("yeappppppp");
+  //   };
+
   renderKeys = () => {
     let keysToRender = this.state.randomKeys;
     let listItems = keysToRender.map((input) => {
@@ -182,6 +321,7 @@ class QuizPage extends React.Component {
             clearClicksWrong={this.clearClicksWrong}
             correctArray={this.state.correctArray}
             wrongArray={this.state.wrongArray}
+            timesUp={this.state.timesUp}
           />
         </li>
       );
@@ -202,6 +342,7 @@ class QuizPage extends React.Component {
             correctArray={this.state.correctArray}
             valuesToUnclick={this.state.valuesToUnclick}
             wrongArray={this.state.wrongArray}
+            timesUp={this.state.timesUp}
           />
         </li>
       );
@@ -210,10 +351,11 @@ class QuizPage extends React.Component {
   };
 
   render() {
-    console.log("CORRECT:", this.state.correctArray);
-    console.log("WRONG:", this.state.wrongArray);
-    // console.log(this.state.clickedKey);
-    // console.log(this.state.clickedValue);
+    // console.log("CORRECT:", this.state.finalCorrectArray);
+    // console.log("RANDOMKEYS:", this.state.randomKeys);
+    // console.log("RANDOMVALUES:", this.state.randomValues);
+    console.log("timesup:", this.state.timesUp);
+    // console.log("WRONG:", this.state.wrongArray);
     return (
       <div>
         <h2> Get Quizzed On Your Translations </h2>
@@ -240,12 +382,16 @@ class QuizPage extends React.Component {
         {this.renderQuiz()}
         {this.state.start && (
           <div>
-            <Timer />
+            <Timer
+              timesUp={this.timesUp}
+              quizComplete={this.state.quizComplete}
+            />
             <Score score={this.state.score} />
             <KeysDiv>{this.renderKeys()}</KeysDiv>
             <ValuesDiv>{this.renderValues()}</ValuesDiv>
           </div>
         )}
+        {this.state.timesUp && <button onClick={this.handleClick}>Done</button>}
       </div>
     );
   }

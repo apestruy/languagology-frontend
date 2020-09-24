@@ -49,6 +49,18 @@ class MainContainer extends React.Component {
     });
   };
 
+  handleNewQuizzes = (newQuiz) => {
+    this.setState({
+      quizzes: [...this.state.quizzes, newQuiz],
+    });
+  };
+
+  handleNewQuizTranslations = (newQT) => {
+    this.setState({
+      quizTranslations: [...this.state.quizTranslations, newQT],
+    });
+  };
+
   render() {
     console.log(this.state);
     return (
@@ -80,7 +92,12 @@ class MainContainer extends React.Component {
           <Route
             path="/quiz"
             render={(props) => (
-              <QuizPage {...props} translations={this.state.translations} />
+              <QuizPage
+                {...props}
+                translations={this.state.translations}
+                handleNewQuizzes={this.handleNewQuizzes}
+                handleNewQuizTranslations={this.handleNewQuizTranslations}
+              />
             )}
           />
           <Route component={WrongLink} />

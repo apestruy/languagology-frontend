@@ -15,12 +15,21 @@ class Timer extends React.Component {
       }
       if (seconds === 0) {
         clearInterval(this.countDown);
+        this.props.timesUp();
       }
       if (quizDone === true) {
         clearInterval(this.countDown);
+        this.props.timesUp();
       }
     }, 1000);
   }
+
+  componentDidUpdate = (prevProps) => {
+    if (this.props.quizComplete !== prevProps.quizComplete) {
+      clearInterval(this.countDown);
+      this.props.timesUp();
+    }
+  };
 
   componentWillUnmount() {
     clearInterval(this.countDown);
@@ -31,6 +40,8 @@ class Timer extends React.Component {
   };
 
   render() {
+    // console.log(this.state.seconds);
+    console.log(this.props.quizComplete);
     return (
       <div>
         <div>Time Remaining: {this.state.seconds} </div>
