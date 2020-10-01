@@ -1,4 +1,5 @@
 import React from "react";
+import { TimeDiv } from "../styled";
 
 class Timer extends React.Component {
   state = {
@@ -35,17 +36,10 @@ class Timer extends React.Component {
     clearInterval(this.countDown);
   }
 
-  handleClick = () => {
-    this.setState({ quizDone: true });
-  };
-
   render() {
-    // console.log(this.state.seconds);
-    console.log(this.props.quizComplete);
     return (
       <div>
-        <div>Time Remaining: {this.state.seconds} </div>
-        <button onClick={this.handleClick}>Done</button>
+        <TimeDiv>Time Remaining: {this.state.seconds} </TimeDiv>
       </div>
     );
   }

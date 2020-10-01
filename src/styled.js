@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const TextArea = styled.textarea`
   border-radius: 5px;
   margin: 1rem;
-  font-size: 1.5em;
-  width: 25em;
-  height: 7em;
+  font-size: 1.6em;
+  width: 26em;
+  height: 9em;
   border: 1px solid black;
   color: black;
   background: #fff5ec;
@@ -29,14 +29,14 @@ export const SelectDiv = styled.div`
 export const Select = styled.select`
   border-radius: 8px;
   margin: 1rem;
-  width: 12em;
-  height: 2.8em;
-  font-size: 17px;
-  font-weight: 550;
+  width: 11em;
+  height: 2.5em;
+  font-size: 19px;
   padding-left: 9px;
-  // color: black;
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid white;
+  border: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.3);
+
+  // color: #00003d;
 `;
 
 export const FilterDiv = styled.div`
@@ -48,92 +48,103 @@ export const FilterText = styled.div`
   position: relative;
   display: inline-block;
   right: 8px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 550;
 `;
 
 export const FilterSelect = styled.select`
   display: inline-block;
   border-radius: 5px;
-  width: 8em;
+  width: 9em;
   height: 2em;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 550;
-  padding-left: 5px;
-  // background: #e3fcfe;
-  background: white;
+  padding-left: 7px;
   border: 1px solid black;
+  background: rgba(255, 255, 255, 0.5);
 `;
 
 export const TranslateButton = styled.button`
   position: fixed;
   border-radius: 25px;
-  top: 332px;
-  right: 170px;
-  width: 8em;
-  height: 3em;
-  font-size: 17px;
-  font-weight: 550;
-  background: #cafafe;
-  color: #a10310;
-  border: 2px solid black;
+  top: 44%;
+  right: 6.6%;
+  width: 7em;
+  height: 2.6em;
+  font-size: 19px;
+  border: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.3);
 `;
 
 export const SaveButton = styled.button`
   border-radius: 25px;
-  right: 750px;
-  width: 11em;
-  height: 2.5em;
-  font-size: 17px;
-  font-weight: 550;
-  background: #cafafe;
-  color: #a10310;
-  border: 2px solid black;
+  width: 9.5em;
+  height: 2.6em;
+  font-size: 19px;
+  border: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.3);
 `;
 
 export const ClearButton = styled.button`
   border-radius: 5px;
   margin: 1rem;
-  width: 10em;
-  height: 2em;
-  font-size: 14px;
-  font-weight: 550;
   padding-left: 5px;
-  background: #97caef;
-  border: 1px solid black;
+  width: 9em;
+  height: 2.1em;
+  font-size: 17px;
+  border: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.3);
+`;
+
+export const BeginQuizButton = styled.button`
+  border-radius: 9px;
+  margin: 1rem;
+  padding-left: 5px;
+  width: 7em;
+  height: 2em;
+  font-size: 18px;
+  border: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.4);
+`;
+
+export const DoneQuizButton = styled.button`
+  position: fixed;
+  bottom: 3%;
+  right: 44.8%;
+  border-radius: 9px;
+  margin: 1rem;
+  padding-left: 5px;
+  width: 6em;
+  height: 2em;
+  font-size: 21px;
+  border: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.4);
 `;
 
 export const Translateh2 = styled.h2`
   font-family: "Helvetica";
-  font-size: 29px;
+  font-size: 33px;
   color: white;
 `;
 
 export const AppNameH1 = styled.h1`
-  // color: #b40304;
   color: white;
-  // color: #e3fcfe;
-  font-size: 55px;
-  //   font-family: "sans-serif";
+  font-size: 62px;
+  padding-left: 25px;
 `;
 
 export const NavButton = styled.button`
-  font-size: 1.1em;
+  font-size: 1.3em;
   margin: 2em;
   width: 7em;
   height: 2em;
   border-radius: 9px;
   position: relative;
-  top: 26px;
+  top: 28px;
   font-family: "sans-serif";
-  // color: #e3fcfe;
   color: white;
   background: rgba(255, 255, 255, 0.1);
-  border: 2px solid #e3fcfe;
-  // background-color: #e7e3d4;
-  //   background-color: #a2dbe1;
-  //   background-color: #f5e6cc;
-  //   background-color: #eae7dc;
+  border: 2px solid white;
 `;
 
 export const ProfTranslationsDiv = styled.div`
@@ -147,9 +158,6 @@ export const ProfTranslationsDiv = styled.div`
   overflow: scroll;
   background: rgba(255, 255, 255, 0.3);
   border: 2px solid white;
-  // background: #d4e7e3;
-  //   background: #a2dbe1;
-  //   background: #9ad7ef;
 `;
 
 export const ProfQuizDiv = styled.div`
@@ -163,16 +171,10 @@ export const ProfQuizDiv = styled.div`
   overflow: scroll;
   background: rgba(255, 255, 255, 0.3);
   border: 2px solid white;
-  // background: #d4e7e3;
-  // background: #e3fcfe;
-  // background: #55bcc9;
-  // background-color: #add8e6;
-  // background: #9ad7ef;
-  // background: #b0dff2;
 `;
 
 export const TranslationText = styled.p`
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 550;
   text-align: left;
   position: relative;
@@ -186,10 +188,6 @@ export const InputDiv = styled.div`
   width: 15em;
   border-radius: 5px;
   background: white;
-  // color: #2d283e;
-  //   background: #cafafe;
-  //   background: #d2fdff;
-  //   color: #5d6985;
 `;
 
 export const OutputDiv = styled.div`
@@ -199,15 +197,7 @@ export const OutputDiv = styled.div`
   width: 15em;
   border-radius: 5px;
   background: white;
-  // background-color: #e3fcfe;
-  // color: #0243b0;
   color: #a10310;
-  //   background: #cafafe;
-  //   background: #d2fdff;
-  //   color: #78244c;
-  //   color: #ac3b61;
-  //   color: #bc4639;
-  //   color: #b23850;
 `;
 
 export const LanguageDiv = styled.div`
@@ -215,7 +205,7 @@ export const LanguageDiv = styled.div`
   display: inline-block;
   left: 250px;
   width: 10em;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 650;
 `;
 
@@ -224,8 +214,6 @@ export const ProfileTitle = styled.div`
   top: 21px;
   font-size: 26px;
   font-weight: 650;
-  // color: #a10310;
-  // color: #2d283e;
 `;
 
 export const GridSavedTranslations = styled.div`
@@ -241,8 +229,6 @@ export const Col = styled.div`
   justify-content: center;
   margin: 1rem;
   padding: 5px;
-  //   flex: 25;
-  //   position: center;
 `;
 
 export const GridQuizResults = styled.div`
@@ -260,7 +246,6 @@ export const ResultsInputDiv = styled.div`
   padding-right: 21px;
   padding-top: 1px;
   padding-bottom: 1px;
-  // border: 2px solid #a10303;
 `;
 
 export const ResultsOutputDiv = styled.div`
@@ -274,7 +259,6 @@ export const ResultsOutputDiv = styled.div`
   padding-right: 21px;
   padding-top: 1px;
   padding-bottom: 1px;
-  // border: 2px solid #a10303;
 `;
 
 export const ScoreDiv = styled.div`
@@ -285,18 +269,16 @@ export const ScoreDiv = styled.div`
 export const InstructionDiv = styled.div`
   position: absolute;
   display: inline;
-  // color: #0243b0;
   color: #a10310;
 `;
 
 export const Ol = styled.ol`
   font-weight: 550;
+  font-size: 17px;
 `;
 
 export const Li = styled.li`
-  // border: 2px solid #a10303;
   background: white;
-  // background: #e3fcfe;
   margin-top: 40px;
   margin-bottom: 40px;
   padding: 12px;
@@ -311,6 +293,7 @@ export const ResultsDiv = styled.div`
 
 export const Ul = styled.ul`
   font-weight: 550;
+  font-size: 17px;
   list-style-type: none;
 `;
 
@@ -321,7 +304,7 @@ export const KeysLi = styled.div`
   height: 1.6em;
   width: 25em;
   border-radius: 10px;
-  background-color: #d4e7e3;
+  background-color: white;
 `;
 
 export const ValuesLi = styled.div`
@@ -331,18 +314,43 @@ export const ValuesLi = styled.div`
   height: 1.6em;
   width: 25em;
   border-radius: 10px;
-  background-color: #d4e7e3;
+  background-color: white;
 `;
 
 export const KeysDiv = styled.div`
   position: absolute;
   text-align: left;
-  left: 300px;
+  left: 100px;
 `;
 
 export const ValuesDiv = styled.div`
   position: relative;
   display: inline-block;
   text-align: left;
-  left: 280px;
+  left: 300px;
+`;
+
+export const QuizDiv = styled.div`
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  position: fixed;
+  left: 10%;
+  right: 10%;
+`;
+
+export const TimeDiv = styled.div`
+  position: relative;
+  top: 15px;
+  font-size: 20px;
+  font-weight: 650;
+  color: white;
+`;
+
+export const ScoreTextDiv = styled.div`
+  position: relative;
+  top: 21px;
+  font-size: 20px;
+  font-weight: 650;
+  color: white;
 `;

@@ -1,6 +1,15 @@
 import React from "react";
 import Timer from "./Timer";
-import { FilterSelect, Ul, KeysDiv, ValuesDiv } from "../styled";
+import {
+  FilterSelect,
+  Ul,
+  KeysDiv,
+  ValuesDiv,
+  QuizDiv,
+  Translateh2,
+  BeginQuizButton,
+  DoneQuizButton,
+} from "../styled";
 import Score from "../components/Score";
 import KeyList from "../components/KeyList";
 import ValueList from "../components/ValueList";
@@ -130,7 +139,9 @@ class QuizPage extends React.Component {
       return (
         <div>
           {!this.state.start && (
-            <button onClick={this.beginQuiz}>Begin Quiz</button>
+            <BeginQuizButton onClick={this.beginQuiz}>
+              Begin Quiz
+            </BeginQuizButton>
           )}
         </div>
       );
@@ -139,7 +150,7 @@ class QuizPage extends React.Component {
       this.state.quizLanguage === "mixed"
     ) {
       return (
-        <h2 style={{ color: "#74131d" }}>
+        <h2 style={{ color: "#a10310" }}>
           There must be at least 5 translations per quiz. Please save{" "}
           {5 - this.filterTranslations().length} translation&#x28;s&#x29; on the
           Translate Page
@@ -147,7 +158,7 @@ class QuizPage extends React.Component {
       );
     } else {
       return (
-        <h2 style={{ color: "#74131d" }}>
+        <h2 style={{ color: "#a10310" }}>
           There must be at least 5 translations per language for each quiz.
           Please save {5 - this.filterTranslations().length} more
           translation&#x28;s&#x29; in {this.state.quizLanguage}.
@@ -358,11 +369,15 @@ class QuizPage extends React.Component {
     // console.log("WRONG:", this.state.wrongArray);
     return (
       <div>
-        <h2> Get Quizzed On Your Translations </h2>
+        <Translateh2> Get Quizzed On Your Translations </Translateh2>
         {!this.state.start && (
           <div>
-            <h3>Must have a minimum of 5 translations saved</h3>
-            <h3>Pick the language you would like to be quizzed in</h3>
+            <h2 style={{ color: "white" }}>
+              Must have a minimum of 5 translations saved
+            </h2>
+            <h2 style={{ color: "white" }}>
+              Pick the language you would like to be quizzed in
+            </h2>
             <FilterSelect
               name="quizLanguage"
               value={this.state.quizLanguage}
@@ -381,7 +396,7 @@ class QuizPage extends React.Component {
         )}
         {this.renderQuiz()}
         {this.state.start && (
-          <div>
+          <QuizDiv>
             <Timer
               timesUp={this.timesUp}
               quizComplete={this.state.quizComplete}
@@ -389,9 +404,11 @@ class QuizPage extends React.Component {
             <Score score={this.state.score} />
             <KeysDiv>{this.renderKeys()}</KeysDiv>
             <ValuesDiv>{this.renderValues()}</ValuesDiv>
-          </div>
+          </QuizDiv>
         )}
-        {this.state.timesUp && <button onClick={this.handleClick}>Done</button>}
+        {this.state.timesUp && (
+          <DoneQuizButton onClick={this.handleClick}>Done</DoneQuizButton>
+        )}
       </div>
     );
   }
