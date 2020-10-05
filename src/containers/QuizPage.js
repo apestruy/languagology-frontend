@@ -9,6 +9,7 @@ import {
   Translateh2,
   BeginQuizButton,
   DoneQuizButton,
+  QuizInstructionsDiv,
 } from "../styled";
 import Score from "../components/Score";
 import KeyList from "../components/KeyList";
@@ -150,19 +151,19 @@ class QuizPage extends React.Component {
       this.state.quizLanguage === "mixed"
     ) {
       return (
-        <h2 style={{ color: "#a10310" }}>
-          There must be at least 5 translations per quiz. Please save{" "}
+        <QuizInstructionsDiv>
+          There must be at least 5 translations per quiz. Please save at least{" "}
           {5 - this.filterTranslations().length} translation&#x28;s&#x29; on the
-          Translate Page
-        </h2>
+          Translate Page.
+        </QuizInstructionsDiv>
       );
     } else {
       return (
-        <h2 style={{ color: "#a10310" }}>
+        <QuizInstructionsDiv>
           There must be at least 5 translations per language for each quiz.
           Please save {5 - this.filterTranslations().length} more
           translation&#x28;s&#x29; in {this.state.quizLanguage}.
-        </h2>
+        </QuizInstructionsDiv>
       );
     }
   };
@@ -196,6 +197,10 @@ class QuizPage extends React.Component {
 
   timesUp = () => {
     this.setState({ timesUp: true });
+  };
+
+  refreshPage = () => {
+    window.location.reload();
   };
 
   handleClick = () => {
@@ -237,6 +242,7 @@ class QuizPage extends React.Component {
             .then((resp) => resp.json())
             .then((newQT) => {
               this.props.handleNewQuizTranslations(newQT);
+              this.refreshPage();
             });
         });
         wrongIDs.map((id) => {
@@ -255,67 +261,11 @@ class QuizPage extends React.Component {
             .then((resp) => resp.json())
             .then((newQT2) => {
               this.props.handleNewQuizTranslations(newQT2);
+              this.refreshPage();
             });
         });
       });
   };
-
-  //   saveQuizResults = () => {
-  //     fetch("http://localhost:3000/api/v1/quizzes", {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         score: this.state.score,
-  //         user_id: 1,
-  //       }),
-  //     })
-  //       .then((resp) => resp.json())
-  //       .then((newQuiz) => {
-  //         this.props.handleNewQuizzes(newQuiz);
-
-  //           this.state.finalCorrectArray.map((id) => {
-  //             return fetch("http://localhost:3000/api/v1/quiz_translations", {
-  //               method: "POST",
-  //               headers: {
-  //                 Accept: "application/json",
-  //                 "Content-Type": "application/json",
-  //               },
-  //               body: JSON.stringify({
-  //                 quiz_id: newQuiz.id,
-  //                 translation_id: id,
-  //                 correct: "yes",
-  //               }),
-  //             })
-  //               .then((resp) => resp.json())
-  //               .then((newQT) => {
-  //                 this.props.handleNewQuizTranslations(newQT);
-  //               });
-  //           });
-  //           this.state.wrongArray.map((id) => {
-  //             return fetch("http://localhost:3000/api/v1/quiz_translations", {
-  //               method: "POST",
-  //               headers: {
-  //                 Accept: "application/json",
-  //                 "Content-Type": "application/json",
-  //               },
-  //               body: JSON.stringify({
-  //                 quiz_id: newQuiz.id,
-  //                 translation_id: id,
-  //                 correct: "no",
-  //               }),
-  //             })
-  //               .then((resp) => resp.json())
-  //               .then((newQT2) => {
-  //                 this.props.handleNewQuizTranslations(newQT2);
-  //               });
-  //           });
-  //       });
-
-  //     // console.log("yeappppppp");
-  //   };
 
   renderKeys = () => {
     let keysToRender = this.state.randomKeys;
@@ -372,12 +322,12 @@ class QuizPage extends React.Component {
         <Translateh2> Get Quizzed On Your Translations </Translateh2>
         {!this.state.start && (
           <div>
-            <h2 style={{ color: "white" }}>
+            <h1 style={{ color: "white" }}>
               Must have a minimum of 5 translations saved
-            </h2>
-            <h2 style={{ color: "white" }}>
+            </h1>
+            <h1 style={{ color: "white" }}>
               Pick the language you would like to be quizzed in
-            </h2>
+            </h1>
             <FilterSelect
               name="quizLanguage"
               value={this.state.quizLanguage}

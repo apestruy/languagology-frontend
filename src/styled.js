@@ -48,7 +48,7 @@ export const FilterText = styled.div`
   position: relative;
   display: inline-block;
   right: 8px;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 550;
 `;
 
@@ -57,7 +57,7 @@ export const FilterSelect = styled.select`
   border-radius: 5px;
   width: 9em;
   height: 2em;
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 550;
   padding-left: 7px;
   border: 1px solid black;
@@ -123,14 +123,17 @@ export const DoneQuizButton = styled.button`
 
 export const Translateh2 = styled.h2`
   font-family: "Helvetica";
-  font-size: 33px;
+  font-size: 35px;
   color: white;
 `;
 
 export const AppNameH1 = styled.h1`
   color: white;
-  font-size: 62px;
-  padding-left: 25px;
+  font-size: 68px;
+  padding-left: 26px;
+  position: relative;
+  top: -15px;
+  // font-family: "Montserrat";
 `;
 
 export const NavButton = styled.button`
@@ -140,7 +143,7 @@ export const NavButton = styled.button`
   height: 2em;
   border-radius: 9px;
   position: relative;
-  top: 28px;
+  top: 21px;
   font-family: "sans-serif";
   color: white;
   background: rgba(255, 255, 255, 0.1);
@@ -151,6 +154,7 @@ export const ProfTranslationsDiv = styled.div`
   position: fixed;
   border-radius: 15px;
   left: 100px;
+  top: 150px;
   width: 44em;
   height: 47em;
   display: flex;
@@ -164,6 +168,7 @@ export const ProfQuizDiv = styled.div`
   position: fixed;
   border-radius: 15px;
   left: 874px;
+  top: 150px;
   width: 44em;
   height: 47em;
   display: flex;
@@ -238,27 +243,31 @@ export const GridQuizResults = styled.div`
 
 export const ResultsInputDiv = styled.div`
   position: absolute;
-  left: 100px;
-  width: 15em;
+  left: 60px;
+  width: 19em;
   border-radius: 5px;
   text-align: left;
+  box-sizing: border-box;
   padding-left: 21px;
-  padding-right: 21px;
+  padding-right: 23px;
   padding-top: 1px;
   padding-bottom: 1px;
+  // border: 1.5px solid black;
 `;
 
 export const ResultsOutputDiv = styled.div`
   position: relative;
   display: inline-block;
-  left: 300px;
-  width: 15em;
+  left: 309px;
+  width: 18em;
   border-radius: 5px;
   text-align: left;
-  padding-left: 21px;
-  padding-right: 21px;
+  box-sizing: border-box;
+  padding-left: 8px;
+  padding-right: 5px;
   padding-top: 1px;
   padding-bottom: 1px;
+  // border: 1.5px solid black;
 `;
 
 export const ScoreDiv = styled.div`
@@ -301,7 +310,7 @@ export const KeysLi = styled.div`
   margin-top: 40px;
   margin-bottom: 40px;
   padding: 14px;
-  height: 1.6em;
+  height: 1.7em;
   width: 25em;
   border-radius: 10px;
   background-color: white;
@@ -311,7 +320,7 @@ export const ValuesLi = styled.div`
   margin-top: 40px;
   margin-bottom: 40px;
   padding: 14px;
-  height: 1.6em;
+  height: 1.7em;
   width: 25em;
   border-radius: 10px;
   background-color: white;
@@ -353,4 +362,46 @@ export const ScoreTextDiv = styled.div`
   font-size: 20px;
   font-weight: 650;
   color: white;
+`;
+
+export const QuizInstructionsDiv = styled.div`
+  width: 32em;
+  font-size: 27px;
+  font-weight: 650;
+  position: relative;
+  left: 24%;
+  color: #a10310;
+  top: 15px;
+  padding: 5px;
+  border-radius: 15px;
+  border: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.3);
+`;
+
+export const SignUpDiv = styled.div`
+  padding: 60px;
+`;
+
+export const SignUpForm = styled.form`
+  margin: 0 auto;
+  width: 320px;
+`;
+
+export const Label = styled.label`
+  display: block;
+  color: white;
+  font-size: 26px;
+  font-weight: 500;
+  text-align: left;
+  margin: 5px;
+`;
+
+export const FormInput = styled.input`
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.3);
+  width: 300px;
+  margin: 3px;
 `;

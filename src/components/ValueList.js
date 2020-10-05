@@ -36,11 +36,11 @@ class ValueList extends React.Component {
       this.props.clickedValue === this.props.output.id &&
       this.props.matchCheck
     ) {
-      return "#1eb65b";
+      return "#22cc66";
     } else if (
       this.props.correctArray.some((id) => id === this.props.output.id)
     ) {
-      return "#1eb65b";
+      return "#22cc66";
     } else if (
       this.props.wrongArray.some((id) => id === this.props.output.id)
     ) {

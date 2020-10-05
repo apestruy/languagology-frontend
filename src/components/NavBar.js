@@ -10,7 +10,7 @@ const NavBar = (props) => {
       </div>
       <Link to="/login">
         <NavButton>
-          <strong>Login</strong>
+          <strong>Sign In</strong>
         </NavButton>
       </Link>
       <Link to="/signup">

@@ -40,19 +40,20 @@ class KeyList extends React.Component {
       this.props.clickedKey === this.props.input.id &&
       !this.props.matchCheck
     ) {
-      return "#1e79b6";
+      return "#2b95dc";
     } else if (
       this.props.clickedKey === this.props.input.id &&
       this.props.matchCheck
     ) {
-      return "#1eb65b";
+      return "#22cc66";
     } else if (
       this.props.correctArray.some((id) => id === this.props.input.id)
     ) {
-      return "#1eb65b";
-    } else if (this.props.wrongArray.some((id) => id === this.props.input.id)) {
-      return "#fd7f7e";
+      return "#22cc66";
     }
+    // else if (this.props.wrongArray.some((id) => id === this.props.input.id)) {
+    //   return "#fd7f7e";
+    // }
   };
 
   render() {
