@@ -387,7 +387,7 @@ export const SignUpForm = styled.form`
   width: 320px;
 `;
 
-export const Label = styled.label`
+export const LabelDiv = styled.div`
   display: block;
   color: white;
   font-size: 26px;
@@ -398,10 +398,22 @@ export const Label = styled.label`
 
 export const FormInput = styled.input`
   padding: 10px;
-  font-size: 16px;
+  font-size: 21px;
   border-radius: 10px;
   border: 1.5px solid white;
   background: rgba(255, 255, 255, 0.3);
   width: 300px;
   margin: 3px;
+`;
+
+export const SignUpLink = styled.div`
+  color: white;
+  font-size: 24px;
+  margin-top: 15px;
+`;
+
+export const ErrorMessage = styled.div`
+  color: #a10310;
+  font-size: 24px;
+  font-weight: 550;
 `;

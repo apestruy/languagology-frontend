@@ -13,11 +13,11 @@ const NavBar = (props) => {
           <strong>Sign In</strong>
         </NavButton>
       </Link>
-      <Link to="/signup">
+      {/* <Link to="/signup">
         <NavButton>
           <strong>Sign Up</strong>
         </NavButton>
-      </Link>
+      </Link> */}
       <Link to="/profile">
         <NavButton>
           <strong>Profile</strong>

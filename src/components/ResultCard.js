@@ -1,12 +1,6 @@
 import React from "react";
 import ResultCardTranslations from "./ResultCardTranslations";
-import {
-  GridQuizResults,
-  Row,
-  ScoreDiv,
-  TranslationsDiv,
-  InstructionDiv,
-} from "../styled";
+import { GridQuizResults, Row, ScoreDiv, InstructionDiv } from "../styled";
 
 class ResultCard extends React.Component {
   filterTranslations = () => {
