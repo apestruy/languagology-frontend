@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Timer from "./Timer";
 import {
   FilterSelect,
@@ -30,6 +31,7 @@ class QuizPage extends React.Component {
     finalCorrectArray: [],
     timesUp: false,
     quizComplete: false,
+    redirect: null,
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -199,8 +201,8 @@ class QuizPage extends React.Component {
     this.setState({ timesUp: true });
   };
 
-  refreshPage = () => {
-    window.location.reload();
+  redirectPage = () => {
+    this.setState({ redirect: "/profile" });
   };
 
   handleClick = () => {
@@ -214,12 +216,13 @@ class QuizPage extends React.Component {
     fetch("http://localhost:3000/api/v1/quizzes", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${this.props.jwt}`,
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         score: this.state.score,
-        user_id: 1,
+        user_id: this.props.userId,
       }),
     })
       .then((resp) => resp.json())
@@ -230,6 +233,7 @@ class QuizPage extends React.Component {
           return fetch("http://localhost:3000/api/v1/quiz_translations", {
             method: "POST",
             headers: {
+              Authorization: `Bearer ${this.props.jwt}`,
               Accept: "application/json",
               "Content-Type": "application/json",
             },
@@ -242,13 +246,13 @@ class QuizPage extends React.Component {
             .then((resp) => resp.json())
             .then((newQT) => {
               this.props.handleNewQuizTranslations(newQT);
-              this.refreshPage();
             });
         });
         wrongIDs.map((id) => {
           return fetch("http://localhost:3000/api/v1/quiz_translations", {
             method: "POST",
             headers: {
+              Authorization: `Bearer ${this.props.jwt}`,
               Accept: "application/json",
               "Content-Type": "application/json",
             },
@@ -261,10 +265,10 @@ class QuizPage extends React.Component {
             .then((resp) => resp.json())
             .then((newQT2) => {
               this.props.handleNewQuizTranslations(newQT2);
-              this.refreshPage();
             });
         });
-      });
+      })
+      .finally(() => this.redirectPage());
   };
 
   renderKeys = () => {
@@ -312,10 +316,14 @@ class QuizPage extends React.Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
+    console.log(this.state.redirect);
     // console.log("CORRECT:", this.state.finalCorrectArray);
     // console.log("RANDOMKEYS:", this.state.randomKeys);
     // console.log("RANDOMVALUES:", this.state.randomValues);
-    console.log("timesup:", this.state.timesUp);
+    // console.log("timesup:", this.state.timesUp);
     // console.log("WRONG:", this.state.wrongArray);
     return (
       <div>

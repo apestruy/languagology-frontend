@@ -15,33 +15,60 @@ class MainContainer extends React.Component {
       translations: [],
       quizzes: [],
       quizTranslations: [],
+      userId: null,
+      login: false,
+      jwt: "",
     };
   }
 
-  componentDidMount() {
-    fetch("http://localhost:3000/api/v1/translations")
-      .then((resp) => resp.json())
-      .then((translations) => {
-        fetch("http://localhost:3000/api/v1/languages")
-          .then((resp) => resp.json())
-          .then((languages) => {
-            fetch("http://localhost:3000/api/v1/quizzes")
-              .then((resp) => resp.json())
-              .then((quizzes) => {
-                fetch("http://localhost:3000/api/v1/quiz_translations")
-                  .then((resp) => resp.json())
-                  .then((quizTranslations) => {
-                    this.setState({
-                      languages: languages,
-                      translations: translations,
-                      quizzes: quizzes,
-                      quizTranslations: quizTranslations,
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.userId !== this.state.userId && this.state.userId) {
+      console.log(this.state.userId);
+      fetch("http://localhost:3000/api/v1/translations", {
+        headers: {
+          Authorization: `Bearer ${this.state.jwt}`,
+        },
+      })
+        .then((resp) => resp.json())
+        .then((translations) => {
+          fetch("http://localhost:3000/api/v1/languages", {
+            headers: {
+              Authorization: `Bearer ${this.state.jwt}`,
+            },
+          })
+            .then((resp) => resp.json())
+            .then((languages) => {
+              fetch("http://localhost:3000/api/v1/quizzes", {
+                headers: {
+                  Authorization: `Bearer ${this.state.jwt}`,
+                },
+              })
+                .then((resp) => resp.json())
+                .then((quizzes) => {
+                  fetch("http://localhost:3000/api/v1/quiz_translations", {
+                    headers: {
+                      Authorization: `Bearer ${this.state.jwt}`,
+                    },
+                  })
+                    .then((resp) => resp.json())
+                    .then((quizTranslations) => {
+                      this.setState({
+                        languages: languages,
+                        translations: translations,
+                        quizzes: quizzes,
+                        quizTranslations: quizTranslations,
+                      });
                     });
-                  });
-              });
-          });
-      });
+                });
+            });
+        });
+    }
   }
+
+  handleLogin = (userId, jwt) => {
+    console.log(userId, jwt);
+    this.setState({ userId: userId, jwt: jwt, login: true });
+  };
 
   handleSavedTranslation = (newTranslation) => {
     this.setState({
@@ -66,7 +93,12 @@ class MainContainer extends React.Component {
     return (
       <div>
         <Switch>
-          <Route path="/login" component={Login} />
+          <Route
+            path="/login"
+            render={(props) => (
+              <Login {...props} handleLogin={this.handleLogin} />
+            )}
+          />
           <Route path="/signup" component={Signup} />
           <Route
             path="/profile"
@@ -97,6 +129,8 @@ class MainContainer extends React.Component {
                 translations={this.state.translations}
                 handleNewQuizzes={this.handleNewQuizzes}
                 handleNewQuizTranslations={this.handleNewQuizTranslations}
+                userId={this.state.userId}
+                jwt={this.state.jwt}
               />
             )}
           />

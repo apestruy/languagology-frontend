@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   SignUpForm,
   SignUpDiv,
@@ -19,6 +19,7 @@ class Signup extends React.Component {
     passwordRepeat: "",
     passwordError: false,
     usernameError: false,
+    redirect: null,
   };
 
   handleChange = (event) => {
@@ -60,12 +61,13 @@ class Signup extends React.Component {
         .then((resp) => resp.json())
         .then((result) => {
           if (result.error === "failed to create user") {
-            // alert(result.error);
-            // console.log("failed to create user");
             this.setState({ usernameError: true, passwordError: false });
           } else {
-            console.log("all good");
-            this.setState({ passwordError: false, usernameError: false });
+            this.setState({
+              passwordError: false,
+              usernameError: false,
+              redirect: "/login",
+            });
           }
         });
     } else if (this.state.password !== this.state.passwordRepeat) {
@@ -75,6 +77,9 @@ class Signup extends React.Component {
 
   render() {
     console.log(this.state);
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
     return (
       <div>
         <SignUpDiv>
@@ -122,17 +127,18 @@ class Signup extends React.Component {
               required
             ></FormInput>
 
+            {this.state.passwordError && (
+              <ErrorMessage>
+                Passwords do not match{" "}
+                <span role="img" aria-label="sad">
+                  😔
+                </span>
+              </ErrorMessage>
+            )}
+
             <BeginQuizButton onClick={this.handleClear}>Clear</BeginQuizButton>
             <BeginQuizButton>Sign Up</BeginQuizButton>
           </SignUpForm>
-          {this.state.passwordError && (
-            <ErrorMessage>
-              Passwords do not match{" "}
-              <span role="img" aria-label="sad">
-                😔
-              </span>
-            </ErrorMessage>
-          )}
           <Link to="/login" style={{ textDecoration: "none" }}>
             <SignUpLink>Already have an account? Sign in!</SignUpLink>
           </Link>
