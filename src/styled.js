@@ -130,20 +130,26 @@ export const Translateh2 = styled.h2`
 export const AppNameH1 = styled.h1`
   color: white;
   font-size: 68px;
-  padding-left: 26px;
-  position: relative;
+  padding-left: 50px;
+  // padding-right: 56px;
+  position: fixed;
   top: -15px;
   // font-family: "Montserrat";
 `;
 
+export const NavDiv = styled.div`
+  position: relative;
+  padding-left: 500px;
+`;
+
 export const NavButton = styled.button`
   font-size: 1.3em;
-  margin: 2em;
+  margin: 3em;
   width: 7em;
   height: 2em;
   border-radius: 9px;
   position: relative;
-  top: 21px;
+  // top: 15px;
   font-family: "sans-serif";
   color: white;
   background: rgba(255, 255, 255, 0.1);

@@ -136,8 +136,8 @@ class Signup extends React.Component {
               </ErrorMessage>
             )}
 
-            <BeginQuizButton onClick={this.handleClear}>Clear</BeginQuizButton>
             <BeginQuizButton>Sign Up</BeginQuizButton>
+            <BeginQuizButton onClick={this.handleClear}>Clear</BeginQuizButton>
           </SignUpForm>
           <Link to="/login" style={{ textDecoration: "none" }}>
             <SignUpLink>Already have an account? Sign in!</SignUpLink>

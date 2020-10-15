@@ -16,14 +16,14 @@ class MainContainer extends React.Component {
       quizzes: [],
       quizTranslations: [],
       userId: null,
-      login: false,
+      // login: false,
       jwt: "",
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.userId !== this.state.userId && this.state.userId) {
-      console.log(this.state.userId);
+      // console.log(this.state.userId);
       fetch("http://localhost:3000/api/v1/translations", {
         headers: {
           Authorization: `Bearer ${this.state.jwt}`,
@@ -63,11 +63,18 @@ class MainContainer extends React.Component {
             });
         });
     }
+    if (
+      prevProps.appUserId !== this.props.appUserId &&
+      this.props.appUserId === null
+    ) {
+      this.setState({ userId: null });
+    }
   }
 
   handleLogin = (userId, jwt) => {
-    console.log(userId, jwt);
-    this.setState({ userId: userId, jwt: jwt, login: true });
+    this.props.setUser(userId);
+    this.setState({ userId: userId, jwt: jwt });
+    // this.setState({ userId: userId, jwt: jwt, login: true });
   };
 
   handleSavedTranslation = (newTranslation) => {
@@ -89,7 +96,7 @@ class MainContainer extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.state.userId);
     return (
       <div>
         <Switch>
