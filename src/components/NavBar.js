@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { NavButton, AppNameH1, NavDiv } from "../styled";
 
 const NavBar = (props) => {
-  console.log(props.userId);
   return (
     <div>
-      {props.userId === null && (
+      {!props.userId && (
         <div>
           <AppNameH1>Languagology</AppNameH1>
           <Link to="/login">
@@ -17,7 +16,7 @@ const NavBar = (props) => {
         </div>
       )}
 
-      {props.userId !== null && (
+      {props.userId && (
         <div>
           <AppNameH1>Languagology</AppNameH1>
           <NavDiv style={{ display: "flex", justifyContent: "space-evenly" }}>

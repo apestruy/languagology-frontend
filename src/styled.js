@@ -35,8 +35,6 @@ export const Select = styled.select`
   padding-left: 9px;
   border: 1.5px solid white;
   background: rgba(255, 255, 255, 0.3);
-
-  // color: #00003d;
 `;
 
 export const FilterDiv = styled.div`
@@ -73,7 +71,7 @@ export const TranslateButton = styled.button`
   height: 2.6em;
   font-size: 19px;
   border: 1.5px solid white;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.4);
 `;
 
 export const SaveButton = styled.button`
@@ -134,7 +132,6 @@ export const AppNameH1 = styled.h1`
   // padding-right: 56px;
   position: fixed;
   top: -15px;
-  // font-family: "Montserrat";
 `;
 
 export const NavDiv = styled.div`
@@ -149,7 +146,6 @@ export const NavButton = styled.button`
   height: 2em;
   border-radius: 9px;
   position: relative;
-  // top: 15px;
   font-family: "sans-serif";
   color: white;
   background: rgba(255, 255, 255, 0.1);
@@ -258,7 +254,6 @@ export const ResultsInputDiv = styled.div`
   padding-right: 23px;
   padding-top: 1px;
   padding-bottom: 1px;
-  // border: 1.5px solid black;
 `;
 
 export const ResultsOutputDiv = styled.div`
@@ -273,7 +268,6 @@ export const ResultsOutputDiv = styled.div`
   padding-right: 5px;
   padding-top: 1px;
   padding-bottom: 1px;
-  // border: 1.5px solid black;
 `;
 
 export const ScoreDiv = styled.div`

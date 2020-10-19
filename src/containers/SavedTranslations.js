@@ -49,7 +49,9 @@ class SavedTranslations extends React.Component {
   render() {
     return (
       <div>
-        <ProfileTitle>Saved Translations</ProfileTitle>
+        <ProfileTitle>
+          {this.renderTranslations().length} Saved Translation(s)
+        </ProfileTitle>
         <FilterBar
           languages={this.filterByLanguage()}
           filter={this.state.filter}

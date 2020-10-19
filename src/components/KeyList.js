@@ -51,13 +51,9 @@ class KeyList extends React.Component {
     ) {
       return "#22cc66";
     }
-    // else if (this.props.wrongArray.some((id) => id === this.props.input.id)) {
-    //   return "#fd7f7e";
-    // }
   };
 
   render() {
-    console.log(this.props.input.id, this.state);
     return (
       <KeysLi
         style={{ background: this.colorSelectedKey() }}

@@ -4,12 +4,10 @@ import { TimeDiv } from "../styled";
 class Timer extends React.Component {
   state = {
     seconds: 30,
-    // quizDone: false,
   };
 
   componentDidMount() {
     this.countDown = setInterval(() => {
-      // const { seconds, quizDone } = this.state;
       const { seconds } = this.state;
 
       if (seconds > 0) {
@@ -19,10 +17,6 @@ class Timer extends React.Component {
         clearInterval(this.countDown);
         this.props.timesUp();
       }
-      // if (quizDone === true) {
-      //   clearInterval(this.countDown);
-      //   this.props.timesUp();
-      // }
     }, 1000);
   }
 

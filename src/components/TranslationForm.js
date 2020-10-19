@@ -69,13 +69,14 @@ class TranslationForm extends React.Component {
     fetch("http://localhost:3000/api/v1/translations", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${sessionStorage.jwt}`,
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         input: this.state.input,
         output: this.state.output,
-        user_id: 1,
+        user_id: parseInt(sessionStorage.userId),
         language_id: this.state.languageId,
       }),
     })
@@ -83,7 +84,7 @@ class TranslationForm extends React.Component {
       .then((newTranslation) => {
         this.props.handleSavedTranslation(newTranslation);
         this.setState({
-          saved: !this.state.saved,
+          saved: true,
         });
       });
   };

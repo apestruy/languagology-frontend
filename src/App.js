@@ -5,7 +5,7 @@ import MainContainer from "./containers/MainContainer";
 
 class App extends React.Component {
   state = {
-    userId: null,
+    userId: sessionStorage.userId,
   };
 
   setUser = (userId) => {
@@ -13,16 +13,15 @@ class App extends React.Component {
   };
 
   clearUser = () => {
+    sessionStorage.clear();
     this.setState({ userId: null });
   };
 
   render() {
-    console.log(this.state);
-
     return (
       <div className="App">
         <NavBar userId={this.state.userId} clearUser={this.clearUser} />
-        <MainContainer setUser={this.setUser} appUserId={this.state.userId} />
+        <MainContainer setUser={this.setUser} />
       </div>
     );
   }
