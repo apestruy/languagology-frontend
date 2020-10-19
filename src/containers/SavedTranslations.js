@@ -1,7 +1,13 @@
 import React from "react";
 import TranslationCard from "../components/TranslationCard";
 import FilterBar from "../components/FilterBar";
-import { GridSavedTranslations, Row, Col, ProfileTitle } from "../styled";
+import {
+  GridSavedTranslations,
+  Row,
+  Col,
+  ProfileTitle,
+  ProfileInstructions,
+} from "../styled";
 
 class SavedTranslations extends React.Component {
   state = {
@@ -49,19 +55,35 @@ class SavedTranslations extends React.Component {
   render() {
     return (
       <div>
-        <ProfileTitle>
-          {this.renderTranslations().length} Saved Translation(s)
-        </ProfileTitle>
-        <FilterBar
-          languages={this.filterByLanguage()}
-          filter={this.state.filter}
-          handleChange={this.handleChange}
-        />
-        <GridSavedTranslations>
-          <Row>
-            <Col>{this.renderTranslations()}</Col>
-          </Row>
-        </GridSavedTranslations>
+        {this.renderTranslations().length === 1 ? (
+          <ProfileTitle>
+            {this.renderTranslations().length} Saved Translation
+          </ProfileTitle>
+        ) : this.renderTranslations().length === 0 ? (
+          <ProfileTitle>No Saved Translations Yet</ProfileTitle>
+        ) : (
+          <ProfileTitle>
+            {this.renderTranslations().length} Saved Translations
+          </ProfileTitle>
+        )}
+        {this.renderTranslations().length === 0 ? (
+          <ProfileInstructions>
+            Please save translations on the Translate Page
+          </ProfileInstructions>
+        ) : (
+          <div>
+            <FilterBar
+              languages={this.filterByLanguage()}
+              filter={this.state.filter}
+              handleChange={this.handleChange}
+            />
+            <GridSavedTranslations>
+              <Row>
+                <Col>{this.renderTranslations()}</Col>
+              </Row>
+            </GridSavedTranslations>
+          </div>
+        )}
       </div>
     );
   }

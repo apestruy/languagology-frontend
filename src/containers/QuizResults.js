@@ -1,6 +1,6 @@
 import React from "react";
 import ResultCard from "../components/ResultCard";
-import { ProfileTitle, Li, Ol } from "../styled";
+import { ProfileTitle, Li, Ol, ProfileInstructions } from "../styled";
 
 class QuizResults extends React.Component {
   renderResults = () => {
@@ -22,8 +22,19 @@ class QuizResults extends React.Component {
   render() {
     return (
       <div>
-        <ProfileTitle>Quiz Results</ProfileTitle>
-        {this.renderResults()}
+        {this.renderResults().props.children[1].length === 0 ? (
+          <div>
+            <ProfileTitle>No Quiz Results Yet</ProfileTitle>
+            <ProfileInstructions>
+              Get quizzed on your translations on the Quiz Page
+            </ProfileInstructions>
+          </div>
+        ) : (
+          <div>
+            <ProfileTitle>Quiz Results</ProfileTitle>
+            {this.renderResults()}
+          </div>
+        )}
       </div>
     );
   }

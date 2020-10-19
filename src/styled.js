@@ -378,6 +378,14 @@ export const QuizInstructionsDiv = styled.div`
   background: rgba(255, 255, 255, 0.3);
 `;
 
+export const ProfileInstructions = styled.h2`
+  font-size: 28px;
+  font-weight: 650;
+  position: relative;
+  top: 33px;
+  color: #a10310;
+`;
+
 export const SignUpDiv = styled.div`
   padding: 60px;
 `;
