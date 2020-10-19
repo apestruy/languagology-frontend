@@ -85,7 +85,6 @@ class QuizPage extends React.Component {
   clearClicksCorrect = (key) => {
     const correctArray = [...this.state.correctArray];
     correctArray.push(this.state.clickedKey);
-    // correctArray.push(this.state.clickedValue);
     this.setState({
       correctArray: correctArray,
       clickedKey: key,
@@ -210,19 +209,17 @@ class QuizPage extends React.Component {
     const allIDs = keys.map((key) => key.id);
     const correctIDs = this.state.finalCorrectArray;
     const wrongIDs = allIDs.filter((x) => correctIDs.indexOf(x) === -1);
-    console.log("ALL IDS:", allIDs);
-    console.log("CORRECT ID:", correctIDs);
-    console.log("WRONG IDS:", wrongIDs);
+
     fetch("http://localhost:3000/api/v1/quizzes", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${this.props.jwt}`,
+        Authorization: `Bearer ${sessionStorage.jwt}`,
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         score: this.state.score,
-        user_id: this.props.userId,
+        user_id: parseInt(sessionStorage.userId),
       }),
     })
       .then((resp) => resp.json())
@@ -233,7 +230,7 @@ class QuizPage extends React.Component {
           return fetch("http://localhost:3000/api/v1/quiz_translations", {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${this.props.jwt}`,
+              Authorization: `Bearer ${sessionStorage.jwt}`,
               Accept: "application/json",
               "Content-Type": "application/json",
             },
@@ -252,7 +249,7 @@ class QuizPage extends React.Component {
           return fetch("http://localhost:3000/api/v1/quiz_translations", {
             method: "POST",
             headers: {
-              Authorization: `Bearer ${this.props.jwt}`,
+              Authorization: `Bearer ${sessionStorage.jwt}`,
               Accept: "application/json",
               "Content-Type": "application/json",
             },
@@ -319,12 +316,6 @@ class QuizPage extends React.Component {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />;
     }
-    console.log(this.state.redirect);
-    // console.log("CORRECT:", this.state.finalCorrectArray);
-    // console.log("RANDOMKEYS:", this.state.randomKeys);
-    // console.log("RANDOMVALUES:", this.state.randomValues);
-    // console.log("timesup:", this.state.timesUp);
-    // console.log("WRONG:", this.state.wrongArray);
     return (
       <div>
         <Translateh2> Get Quizzed On Your Translations </Translateh2>

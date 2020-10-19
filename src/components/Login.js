@@ -48,7 +48,6 @@ class Login extends React.Component {
       .then((resp) => resp.json())
       .then((result) => {
         if (result.message === "Invalid username or password") {
-          // console.log("OOPS");
           this.setState({ invalidLogin: true });
         } else {
           fetch("http://localhost:3000/api/v1/profile", {
@@ -58,19 +57,17 @@ class Login extends React.Component {
           })
             .then((resp) => resp.json())
             .then((result2) => {
-              this.props.handleLogin(result.user.id, result.jwt);
+              sessionStorage.clear();
+              sessionStorage.userId = result2.user.id;
+              sessionStorage.jwt = result.jwt;
+              this.props.handleLogin();
               this.setState({ invalidLogin: false, redirect: "/profile" });
             });
-          // localStorage.clear();
-          // localStorage.id = result2.user.id;
-          // console.log(result2);
-          // console.log(result);
         }
       });
   };
 
   render() {
-    console.log(this.state);
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />;
     }

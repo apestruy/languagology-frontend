@@ -15,39 +15,39 @@ class MainContainer extends React.Component {
       translations: [],
       quizzes: [],
       quizTranslations: [],
-      userId: null,
-      // login: false,
-      jwt: "",
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.userId !== this.state.userId && this.state.userId) {
-      // console.log(this.state.userId);
+  componentDidMount() {
+    this.sessionStored();
+  }
+
+  sessionStored = () => {
+    if (sessionStorage.userId && sessionStorage.jwt) {
       fetch("http://localhost:3000/api/v1/translations", {
         headers: {
-          Authorization: `Bearer ${this.state.jwt}`,
+          Authorization: `Bearer ${sessionStorage.jwt}`,
         },
       })
         .then((resp) => resp.json())
         .then((translations) => {
           fetch("http://localhost:3000/api/v1/languages", {
             headers: {
-              Authorization: `Bearer ${this.state.jwt}`,
+              Authorization: `Bearer ${sessionStorage.jwt}`,
             },
           })
             .then((resp) => resp.json())
             .then((languages) => {
               fetch("http://localhost:3000/api/v1/quizzes", {
                 headers: {
-                  Authorization: `Bearer ${this.state.jwt}`,
+                  Authorization: `Bearer ${sessionStorage.jwt}`,
                 },
               })
                 .then((resp) => resp.json())
                 .then((quizzes) => {
                   fetch("http://localhost:3000/api/v1/quiz_translations", {
                     headers: {
-                      Authorization: `Bearer ${this.state.jwt}`,
+                      Authorization: `Bearer ${sessionStorage.jwt}`,
                     },
                   })
                     .then((resp) => resp.json())
@@ -63,18 +63,11 @@ class MainContainer extends React.Component {
             });
         });
     }
-    if (
-      prevProps.appUserId !== this.props.appUserId &&
-      this.props.appUserId === null
-    ) {
-      this.setState({ userId: null });
-    }
-  }
+  };
 
-  handleLogin = (userId, jwt) => {
-    this.props.setUser(userId);
-    this.setState({ userId: userId, jwt: jwt });
-    // this.setState({ userId: userId, jwt: jwt, login: true });
+  handleLogin = () => {
+    this.sessionStored();
+    this.props.setUser(parseInt(sessionStorage.userId));
   };
 
   handleSavedTranslation = (newTranslation) => {
@@ -96,7 +89,7 @@ class MainContainer extends React.Component {
   };
 
   render() {
-    console.log(this.state.userId);
+    console.log(sessionStorage);
     return (
       <div>
         <Switch>
@@ -136,8 +129,6 @@ class MainContainer extends React.Component {
                 translations={this.state.translations}
                 handleNewQuizzes={this.handleNewQuizzes}
                 handleNewQuizTranslations={this.handleNewQuizTranslations}
-                userId={this.state.userId}
-                jwt={this.state.jwt}
               />
             )}
           />

@@ -10,7 +10,7 @@ class ValueList extends React.Component {
   handleClick = () => {
     if (
       this.colorSelectedValue() === "#fd7f7e" ||
-      (this.colorSelectedValue() === "#1eb65b" && !this.props.timesUp)
+      (this.colorSelectedValue() === "#22cc66" && !this.props.timesUp)
     ) {
       this.setState({ colored: true });
     } else if (
@@ -49,7 +49,6 @@ class ValueList extends React.Component {
   };
 
   render() {
-    console.log(this.props.output.id);
     return (
       <ValuesLi
         style={{ background: this.colorSelectedValue() }}
