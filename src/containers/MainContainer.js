@@ -118,6 +118,7 @@ class MainContainer extends React.Component {
                 {...props}
                 languages={this.state.languages}
                 handleSavedTranslation={this.handleSavedTranslation}
+                translations={this.state.translations}
               />
             )}
           />

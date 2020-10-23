@@ -60,6 +60,7 @@ class Login extends React.Component {
               sessionStorage.clear();
               sessionStorage.userId = result2.user.id;
               sessionStorage.jwt = result.jwt;
+              sessionStorage.name = result2.user.name;
               this.props.handleLogin();
               this.setState({ invalidLogin: false, redirect: "/profile" });
             });

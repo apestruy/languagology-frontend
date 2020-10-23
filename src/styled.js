@@ -63,19 +63,18 @@ export const FilterSelect = styled.select`
 `;
 
 export const TranslateButton = styled.button`
-  position: fixed;
-  border-radius: 25px;
-  top: 44%;
-  right: 6.6%;
+  margin-bottom: 1rem;
+  border-radius: 8px;
   width: 7em;
   height: 2.6em;
   font-size: 19px;
   border: 1.5px solid white;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.3);
 `;
 
 export const SaveButton = styled.button`
-  border-radius: 25px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
   width: 9.5em;
   height: 2.6em;
   font-size: 19px;
@@ -85,7 +84,6 @@ export const SaveButton = styled.button`
 
 export const ClearButton = styled.button`
   border-radius: 5px;
-  margin: 1rem;
   padding-left: 5px;
   width: 9em;
   height: 2.1em;
@@ -372,6 +370,20 @@ export const QuizInstructionsDiv = styled.div`
   left: 24%;
   color: #a10310;
   top: 15px;
+  padding: 5px;
+  border-radius: 15px;
+  border: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.3);
+`;
+
+export const SameInputDiv = styled.div`
+  width: 50em;
+  font-size: 24px;
+  font-weight: 650;
+  position: relative;
+  left: 14%;
+  color: #a10310;
+  margin-bottom: 1rem;
   padding: 5px;
   border-radius: 15px;
   border: 1.5px solid white;

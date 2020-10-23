@@ -31,7 +31,11 @@ class QuizResults extends React.Component {
           </div>
         ) : (
           <div>
-            <ProfileTitle>Quiz Results</ProfileTitle>
+            <ProfileTitle>
+              {sessionStorage.name.charAt(0).toUpperCase() +
+                sessionStorage.name.slice(1)}
+              's Quiz Results
+            </ProfileTitle>
             {this.renderResults()}
           </div>
         )}

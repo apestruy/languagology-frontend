@@ -8,6 +8,7 @@ import {
   SaveButton,
   Translateh2,
   ClearButton,
+  SameInputDiv,
 } from "../styled";
 
 class TranslationForm extends React.Component {
@@ -17,6 +18,7 @@ class TranslationForm extends React.Component {
     chosenLanguage: "",
     languageId: "",
     saved: false,
+    inputExists: false,
   };
 
   fetchApi = (event) => {
@@ -52,7 +54,9 @@ class TranslationForm extends React.Component {
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
+      output: "",
       saved: false,
+      inputExists: false,
     });
   };
 
@@ -61,32 +65,43 @@ class TranslationForm extends React.Component {
       [event.target.name]:
         event.target.value.charAt(0).toUpperCase() +
         event.target.value.slice(1),
+      output: "",
       saved: false,
+      inputExists: false,
     });
   };
 
   saveTranslation = () => {
-    fetch("http://localhost:3000/api/v1/translations", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${sessionStorage.jwt}`,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        input: this.state.input,
-        output: this.state.output,
-        user_id: parseInt(sessionStorage.userId),
-        language_id: this.state.languageId,
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((newTranslation) => {
-        this.props.handleSavedTranslation(newTranslation);
-        this.setState({
-          saved: true,
+    const userTranslations = this.props.translations;
+    const newInput = this.state.input.replace(/\s+/g, "").toLowerCase();
+    const uniformTranslations = userTranslations.map((translation) =>
+      translation.input.replace(/\s+/g, "").toLowerCase()
+    );
+    if (uniformTranslations.includes(newInput)) {
+      this.setState({ inputExists: true });
+    } else {
+      fetch("http://localhost:3000/api/v1/translations", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.jwt}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          input: this.state.input,
+          output: this.state.output,
+          user_id: parseInt(sessionStorage.userId),
+          language_id: this.state.languageId,
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((newTranslation) => {
+          this.props.handleSavedTranslation(newTranslation);
+          this.setState({
+            saved: true,
+          });
         });
-      });
+    }
   };
 
   clearTextAreas = () => {
@@ -96,6 +111,7 @@ class TranslationForm extends React.Component {
       chosenLanguage: "",
       languageId: "",
       saved: false,
+      inputExists: false,
     });
   };
 
@@ -139,6 +155,20 @@ class TranslationForm extends React.Component {
               onChange={this.handleChange}
               disabled={true}
             />
+            <div>
+              {this.state.inputExists && (
+                <SameInputDiv>
+                  Sorry!{" "}
+                  <span role="img" aria-label="sad">
+                    😔
+                  </span>{" "}
+                  Cannot save this translation. An identical input already
+                  exists in your Saved Translations. <br></br> It will be
+                  difficult to pass a quiz if inputs are identical. Please
+                  change the input and try again.
+                </SameInputDiv>
+              )}
+            </div>
             <div>
               {this.state.input && this.state.chosenLanguage && (
                 <TranslateButton type="submit">Translate</TranslateButton>
