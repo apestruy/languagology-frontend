@@ -210,7 +210,7 @@ class QuizPage extends React.Component {
     const correctIDs = this.state.finalCorrectArray;
     const wrongIDs = allIDs.filter((x) => correctIDs.indexOf(x) === -1);
 
-    fetch("http://localhost:3000/api/v1/quizzes", {
+    fetch("https://languagology.herokuapp.com/api/v1/quizzes", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${sessionStorage.jwt}`,
@@ -227,38 +227,44 @@ class QuizPage extends React.Component {
         this.props.handleNewQuizzes(newQuiz);
 
         correctIDs.map((id) => {
-          return fetch("http://localhost:3000/api/v1/quiz_translations", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${sessionStorage.jwt}`,
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              quiz_id: newQuiz.id,
-              translation_id: id,
-              correct: "yes",
-            }),
-          })
+          return fetch(
+            "https://languagology.herokuapp.com/api/v1/quiz_translations",
+            {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${sessionStorage.jwt}`,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                quiz_id: newQuiz.id,
+                translation_id: id,
+                correct: "yes",
+              }),
+            }
+          )
             .then((resp) => resp.json())
             .then((newQT) => {
               this.props.handleNewQuizTranslations(newQT);
             });
         });
         wrongIDs.map((id) => {
-          return fetch("http://localhost:3000/api/v1/quiz_translations", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${sessionStorage.jwt}`,
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              quiz_id: newQuiz.id,
-              translation_id: id,
-              correct: "no",
-            }),
-          })
+          return fetch(
+            "https://languagology.herokuapp.com/api/v1/quiz_translations",
+            {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${sessionStorage.jwt}`,
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                quiz_id: newQuiz.id,
+                translation_id: id,
+                correct: "no",
+              }),
+            }
+          )
             .then((resp) => resp.json())
             .then((newQT2) => {
               this.props.handleNewQuizTranslations(newQT2);

@@ -80,7 +80,7 @@ class TranslationForm extends React.Component {
     if (uniformTranslations.includes(newInput)) {
       this.setState({ inputExists: true });
     } else {
-      fetch("http://localhost:3000/api/v1/translations", {
+      fetch("https://languagology.herokuapp.com/api/v1/translations", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${sessionStorage.jwt}`,

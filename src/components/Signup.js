@@ -44,7 +44,7 @@ class Signup extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.password === this.state.passwordRepeat) {
-      fetch("http://localhost:3000/api/v1/users", {
+      fetch("https://languagology.herokuapp.com/api/v1/users", {
         method: "POST",
         headers: {
           Accept: "application/json",

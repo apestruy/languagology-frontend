@@ -32,7 +32,7 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3000/api/v1/login", {
+    fetch("https://languagology.herokuapp.com/api/v1/login", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -50,7 +50,7 @@ class Login extends React.Component {
         if (result.message === "Invalid username or password") {
           this.setState({ invalidLogin: true });
         } else {
-          fetch("http://localhost:3000/api/v1/profile", {
+          fetch("https://languagology.herokuapp.com/api/v1/profile", {
             headers: {
               Authorization: `Bearer ${result.jwt}`,
             },

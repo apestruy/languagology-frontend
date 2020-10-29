@@ -24,32 +24,35 @@ class MainContainer extends React.Component {
 
   sessionStored = () => {
     if (sessionStorage.userId && sessionStorage.jwt) {
-      fetch("http://localhost:3000/api/v1/translations", {
+      fetch("https://languagology.herokuapp.com/api/v1/translations", {
         headers: {
           Authorization: `Bearer ${sessionStorage.jwt}`,
         },
       })
         .then((resp) => resp.json())
         .then((translations) => {
-          fetch("http://localhost:3000/api/v1/languages", {
+          fetch("https://languagology.herokuapp.com/api/v1/languages", {
             headers: {
               Authorization: `Bearer ${sessionStorage.jwt}`,
             },
           })
             .then((resp) => resp.json())
             .then((languages) => {
-              fetch("http://localhost:3000/api/v1/quizzes", {
+              fetch("https://languagology.herokuapp.com/api/v1/quizzes", {
                 headers: {
                   Authorization: `Bearer ${sessionStorage.jwt}`,
                 },
               })
                 .then((resp) => resp.json())
                 .then((quizzes) => {
-                  fetch("http://localhost:3000/api/v1/quiz_translations", {
-                    headers: {
-                      Authorization: `Bearer ${sessionStorage.jwt}`,
-                    },
-                  })
+                  fetch(
+                    "https://languagology.herokuapp.com/api/v1/quiz_translations",
+                    {
+                      headers: {
+                        Authorization: `Bearer ${sessionStorage.jwt}`,
+                      },
+                    }
+                  )
                     .then((resp) => resp.json())
                     .then((quizTranslations) => {
                       this.setState({
