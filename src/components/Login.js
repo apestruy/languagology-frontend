@@ -17,6 +17,7 @@ class Login extends React.Component {
     password: "",
     invalidLogin: false,
     redirect: null,
+    loading: false,
   };
 
   handleChange = (event) => {
@@ -32,40 +33,46 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    fetch("https://languagology.herokuapp.com/api/v1/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user: {
-          username: this.state.username,
-          password: this.state.password,
+    this.setState({ loading: true }, () => {
+      fetch("https://languagology.herokuapp.com/api/v1/login", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-      }),
-    })
-      .then((resp) => resp.json())
-      .then((result) => {
-        if (result.message === "Invalid username or password") {
-          this.setState({ invalidLogin: true });
-        } else {
-          fetch("https://languagology.herokuapp.com/api/v1/profile", {
-            headers: {
-              Authorization: `Bearer ${result.jwt}`,
-            },
-          })
-            .then((resp) => resp.json())
-            .then((result2) => {
-              sessionStorage.clear();
-              sessionStorage.userId = result2.user.id;
-              sessionStorage.jwt = result.jwt;
-              sessionStorage.name = result2.user.name;
-              this.props.handleLogin();
-              this.setState({ invalidLogin: false, redirect: "/profile" });
-            });
-        }
-      });
+        body: JSON.stringify({
+          user: {
+            username: this.state.username,
+            password: this.state.password,
+          },
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((result) => {
+          if (result.message === "Invalid username or password") {
+            this.setState({ loading: false, invalidLogin: true });
+          } else {
+            fetch("https://languagology.herokuapp.com/api/v1/profile", {
+              headers: {
+                Authorization: `Bearer ${result.jwt}`,
+              },
+            })
+              .then((resp) => resp.json())
+              .then((result2) => {
+                sessionStorage.clear();
+                sessionStorage.userId = result2.user.id;
+                sessionStorage.jwt = result.jwt;
+                sessionStorage.name = result2.user.name;
+                this.props.handleLogin();
+                this.setState({
+                  loading: false,
+                  invalidLogin: false,
+                  redirect: "/profile",
+                });
+              });
+          }
+        });
+    });
   };
 
   render() {
@@ -107,6 +114,14 @@ class Login extends React.Component {
             <BeginQuizButton>Sign In</BeginQuizButton>
             <BeginQuizButton onClick={this.handleClear}>Clear</BeginQuizButton>
           </SignUpForm>
+
+          {this.state.loading && (
+            <img
+              src="https://media.giphy.com/media/jPMTCdfeo0AQx3iyid/giphy.gif"
+              alt="loading"
+              width="80"
+            />
+          )}
 
           <Link to="/signup" style={{ textDecoration: "none" }}>
             <SignUpLink>Don't have an account? Sign up!</SignUpLink>

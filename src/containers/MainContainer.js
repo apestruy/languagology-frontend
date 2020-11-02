@@ -92,7 +92,6 @@ class MainContainer extends React.Component {
   };
 
   render() {
-    console.log(sessionStorage);
     return (
       <div>
         <Switch>
@@ -134,6 +133,13 @@ class MainContainer extends React.Component {
                 handleNewQuizzes={this.handleNewQuizzes}
                 handleNewQuizTranslations={this.handleNewQuizTranslations}
               />
+            )}
+          />
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <Login {...props} handleLogin={this.handleLogin} />
             )}
           />
           <Route component={WrongLink} />

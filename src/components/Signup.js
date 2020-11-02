@@ -20,6 +20,7 @@ class Signup extends React.Component {
     passwordError: false,
     usernameError: false,
     redirect: null,
+    loading: false,
   };
 
   handleChange = (event) => {
@@ -44,32 +45,39 @@ class Signup extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.password === this.state.passwordRepeat) {
-      fetch("https://languagology.herokuapp.com/api/v1/users", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: {
-            username: this.state.username,
-            password: this.state.password,
-            name: this.state.name,
+      this.setState({ loading: true }, () => {
+        fetch("https://languagology.herokuapp.com/api/v1/users", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
-        }),
-      })
-        .then((resp) => resp.json())
-        .then((result) => {
-          if (result.error === "failed to create user") {
-            this.setState({ usernameError: true, passwordError: false });
-          } else {
-            this.setState({
-              passwordError: false,
-              usernameError: false,
-              redirect: "/login",
-            });
-          }
-        });
+          body: JSON.stringify({
+            user: {
+              username: this.state.username,
+              password: this.state.password,
+              name: this.state.name,
+            },
+          }),
+        })
+          .then((resp) => resp.json())
+          .then((result) => {
+            if (result.error === "failed to create user") {
+              this.setState({
+                loading: false,
+                usernameError: true,
+                passwordError: false,
+              });
+            } else {
+              this.setState({
+                loading: false,
+                passwordError: false,
+                usernameError: false,
+                redirect: "/login",
+              });
+            }
+          });
+      });
     } else if (this.state.password !== this.state.passwordRepeat) {
       this.setState({ passwordError: true, usernameError: false });
     }
@@ -138,6 +146,15 @@ class Signup extends React.Component {
             <BeginQuizButton>Sign Up</BeginQuizButton>
             <BeginQuizButton onClick={this.handleClear}>Clear</BeginQuizButton>
           </SignUpForm>
+
+          {this.state.loading && (
+            <img
+              src="https://media.giphy.com/media/jPMTCdfeo0AQx3iyid/giphy.gif"
+              alt="loading"
+              width="80"
+            />
+          )}
+
           <Link to="/login" style={{ textDecoration: "none" }}>
             <SignUpLink>Already have an account? Sign in!</SignUpLink>
           </Link>
